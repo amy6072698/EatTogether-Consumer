@@ -1673,8 +1673,8 @@ import { useOrderStore } from '@/stores/order'
 import { useAuthStore } from '@/stores/auth'
 import { RouterLink, useRouter } from 'vue-router'
 import apiFetch from '@/utils/apiFetch'
-import DishDetailModal from '@/components/Order/DishDetailModal.vue'
-import SetMealSelectModal from '@/components/Order/SetMealSelectModal.vue'
+import DishDetailModal from '@/components/order/DishDetailModal.vue'
+import SetMealSelectModal from '@/components/order/SetMealSelectModal.vue'
 import EditPickupModal from '@/components/order/EditPickupModal.vue'
 
 const store = useOrderStore()
