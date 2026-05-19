@@ -1,5 +1,6 @@
 ﻿using EatTogether.API.Models.DTOs;
 using EatTogether.API.Models.EfModels;
+using EatTogether.API.Models.Infra;
 using EatTogether.API.Models.Repositories;
 
 namespace EatTogether.API.Models.Services
@@ -14,10 +15,12 @@ namespace EatTogether.API.Models.Services
 	public class NewsService : INewsService
 	{
 		private readonly INewsRepository _newsRepo;
+		private readonly ImageUrlResolver _imageUrlResolver;
 
-		public NewsService(INewsRepository newsRepo)
+		public NewsService(INewsRepository newsRepo, ImageUrlResolver imageUrlResolver)
 		{
 			_newsRepo = newsRepo;
+			_imageUrlResolver = imageUrlResolver;
 		}
 
 		public async Task<NewsPagedResultDto<NewsListDto>> GetNewsListAsync(int page, int pageSize, string? categoryName)
@@ -34,8 +37,8 @@ namespace EatTogether.API.Models.Services
 						  ? (n.Description.Length > 100 ? n.Description.Substring(0, 100) + "…" : n.Description)
 						  : "",
 				CoverImageUrl = !string.IsNullOrWhiteSpace(n.CoverImageUrl)
-								? "/images/articles/" + n.CoverImageUrl
-								: "/images/articles/article-14.jpg",  //預設公告圖片
+								? _imageUrlResolver.Resolve(n.CoverImageUrl, null, "articles")
+								: _imageUrlResolver.Resolve("article-14.jpg", null, "articles"), //預設公告圖片
 				PublishDate = n.PublishDate,
 				IsPinned = n.IsPinned,
 				ViewCount = n.ViewCount
@@ -63,8 +66,8 @@ namespace EatTogether.API.Models.Services
 				Title = article.Title,
 				Description = article.Description,
 				CoverImageUrl = !string.IsNullOrWhiteSpace(article.CoverImageUrl)
-								? "/images/articles/" + article.CoverImageUrl
-								: "/images/articles/article-14.jpg", //預設公告圖片
+								? _imageUrlResolver.Resolve(article.CoverImageUrl, null, "articles")
+								: _imageUrlResolver.Resolve("article-14.jpg", null, "articles"), //預設公告圖片
 				PublishDate = article.PublishDate,
 				ViewCount = article.ViewCount,
 				IsPinned = article.IsPinned
