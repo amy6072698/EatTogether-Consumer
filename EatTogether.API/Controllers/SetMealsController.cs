@@ -1,3 +1,4 @@
+using EatTogether.API.Models.Infra;
 using EatTogether.Models.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,33 +11,12 @@ namespace EatTogether.API.Controllers;
 public class SetMealsController : ControllerBase
 {
     private readonly ISetMealRepository _setMealRepository;
-    private readonly IConfiguration _config;
+	private readonly ImageUrlResolver _imageUrlResolver;
 
-    public SetMealsController(ISetMealRepository setMealRepository, IConfiguration config)
+    public SetMealsController(ISetMealRepository setMealRepository, ImageUrlResolver imageUrlResolver)
     {
         _setMealRepository = setMealRepository;
-        _config = config;
-    }
-
-    private string ResolveImageUrl(string dbImageUrl, string name)
-    {
-        if (!string.IsNullOrEmpty(dbImageUrl)) return dbImageUrl;
-
-        var staticRoot = _config["StaticFilesRoot"];
-        var imagesFolder = !string.IsNullOrEmpty(staticRoot) && Directory.Exists(Path.Combine(staticRoot, "images"))
-            ? Path.Combine(staticRoot, "images")
-            : Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
-
-        var safeName = name ?? "";
-        foreach (var c in Path.GetInvalidFileNameChars())
-            safeName = safeName.Replace(c, '_');
-
-        if (System.IO.File.Exists(Path.Combine(imagesFolder, safeName + ".jpg")))
-            return "/images/" + safeName + ".jpg";
-        if (System.IO.File.Exists(Path.Combine(imagesFolder, safeName + ".png")))
-            return "/images/" + safeName + ".png";
-
-        return "";
+		_imageUrlResolver = imageUrlResolver;
     }
 
     // GET /api/SetMeals/active
@@ -50,7 +30,7 @@ public class SetMealsController : ControllerBase
             setMealName   = s.SetMealName,
             description   = s.Description,
             setPrice      = s.SetPrice,
-            imageUrl      = ResolveImageUrl(s.ImageUrl, s.SetMealName),
+            imageUrl      = _imageUrlResolver.Resolve(s.ImageUrl, s.SetMealName, "setmeals"),
             isRecommended = s.IsRecommended,
             isPopular     = s.IsPopular,
             startTime     = s.StartTime,
@@ -84,7 +64,7 @@ public class SetMealsController : ControllerBase
             setMealName   = s.SetMealName,
             description   = s.Description,
             setPrice      = s.SetPrice,
-            imageUrl      = ResolveImageUrl(s.ImageUrl, s.SetMealName),
+            imageUrl      = _imageUrlResolver.Resolve(s.ImageUrl, s.SetMealName, "setmeals"),
             isRecommended = s.IsRecommended,
             isPopular     = s.IsPopular,
             startTime     = s.StartTime,

@@ -23,7 +23,7 @@ export default defineConfig(({ mode }) => {
                     secure: false,
                 },
                 '/images': {
-                    target: env.VITE_API_TARGET,
+                    target: env.VITE_ADMIN_TARGET,
                     changeOrigin: true,
                     secure: false,
                 },
