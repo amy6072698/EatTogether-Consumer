@@ -1568,10 +1568,7 @@ function handleImgError(dish) {
 
 function resolveImage(url) {
     if (!url) return ''
-    let path = url.replace(/\\/g, '/').replace(/^~\//, '')
-    const match = /\/wwwroot\/(.*)/i.exec('/' + path)
-    if (match?.[1]) path = match[1]
-    return `/${path.replace(/^\//, '')}`
+    return url
 }
 
 // ── 展示用分類（從真實 products 過濾，保留真實 productId / setMealId / 價格）──
