@@ -11,7 +11,7 @@ namespace EatTogether.API.Models.Infra
 			{
 				HttpOnly = true, // 設定 Cookie 為 HttpOnly，防禦 XSS 攻擊
 				Secure = env.IsProduction(), // 正式環境 true，Cookie 只允許 HTTPS 傳送；開發環境 false，允許 HTTP
-				SameSite = SameSiteMode.Strict, // 跨站限制為最嚴格模式。從其他網站發出的請求，都不會附帶 Cookie，是防禦 CSRF 攻擊
+				SameSite = env.IsProduction() ? SameSiteMode.None : SameSiteMode.Strict, // 跨站限制為最嚴格模式。從其他網站發出的請求，都不會附帶 Cookie，是防禦 CSRF 攻擊
 				Path = "/"
 			};
 		}
