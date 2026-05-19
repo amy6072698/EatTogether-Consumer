@@ -15,7 +15,7 @@
 				: Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
 		}
 
-		public string Resolve(string? dbFileName, string itemName, string subFolder)
+		public string Resolve(string? dbFileName, string? itemName, string subFolder)
 		{
 			string fileName;
 
@@ -26,7 +26,7 @@
 			else
 			{
 				var safeName = itemName ?? "";
-				foreach(var c in Path.GetInvalidFileNameChars())
+				foreach (var c in Path.GetInvalidFileNameChars())
 				{
 					safeName = safeName.Replace(c, '_');
 				}
@@ -49,7 +49,7 @@
 				? $"/images/{subFolder}/{fileName}"
 				: $"{_adminBaseUrl}/images/{subFolder}/{fileName}";
 
-			
+
 		}
 	}
 }
