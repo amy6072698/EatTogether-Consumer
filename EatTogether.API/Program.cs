@@ -234,7 +234,7 @@ namespace EatTogether.API
 				// 正式環境 → 若前端與 API 不同域，請將下方網域替換為實際 API 網域
 				var connectSrc = app.Environment.IsDevelopment()
 					? "'self'"
-					: "'self' https://api.eattogether.com";  // ← 正式部署前請替換為實際 API 網域
+					: "'self' https://eattogether-api-brh5aha4gfdvbmac.westus3-01.azurewebsites.net";  // ← 正式部署前請替換為實際 API 網域
 
 				// 1. Content-Security-Policy
 				//    即使存在 XSS 漏洞，也能透過瀏覽器政策大幅限制攻擊者能做的事（縱深防禦）
