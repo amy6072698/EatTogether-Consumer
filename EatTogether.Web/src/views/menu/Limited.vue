@@ -549,8 +549,7 @@ const stockWidth = (id) => {
 
 const formatImageUrl = (url) => {
     if (!url) return null
-    // 僅接受本地 /images/ 路徑，外部 URL 一律 fallback 至文字佔位
-    return url.startsWith('/images/') ? url : null
+    return url
 }
 
 const formatDate = (dateStr) => {
@@ -816,7 +815,6 @@ const openShareItem = async (type) => {
     }
     shareMenuOpen.value = false
 }
-
 
 const openModal = (dish) => {
     // 售完或即將上架 → 不開 Modal
@@ -2100,7 +2098,10 @@ onUnmounted(() => {
     letter-spacing: 0.1em;
     padding: 0.35rem 1rem;
     cursor: pointer;
-    transition: border-color 0.2s, color 0.2s, background 0.2s;
+    transition:
+        border-color 0.2s,
+        color 0.2s,
+        background 0.2s;
     align-self: flex-start;
 }
 .modal-rate-btn:hover {
@@ -2346,7 +2347,10 @@ onUnmounted(() => {
     cursor: pointer;
     backdrop-filter: blur(12px);
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
-    transition: border-color 0.2s, background 0.2s, opacity 0.2s;
+    transition:
+        border-color 0.2s,
+        background 0.2s,
+        opacity 0.2s;
 }
 .dev-remind-btn:hover:not(:disabled) {
     border-color: rgba(227, 199, 107, 0.8);

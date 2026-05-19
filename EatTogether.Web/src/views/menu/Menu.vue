@@ -3,7 +3,7 @@
         <header class="menu-header">
             <div class="menu-header-bg" ref="headerBgRef"></div>
             <div class="menu-header-overlay"></div>
-            <div class="container" style="position:relative;z-index:2;">
+            <div class="container" style="position: relative; z-index: 2">
                 <span class="menu-eyebrow">Signature Flavors</span>
                 <h1 class="eat-h1">精選菜單</h1>
 
@@ -194,7 +194,9 @@
                         <div class="dish-title-row">
                             <h3 class="dish-name">{{ dish.dishName }}</h3>
                             <div class="dish-price-wrap">
-                                <span class="dish-price">NT$ {{ dish.price.toLocaleString() }}</span>
+                                <span class="dish-price"
+                                    >NT$ {{ dish.price.toLocaleString() }}</span
+                                >
                             </div>
                         </div>
                         <p class="dish-desc">
@@ -205,7 +207,20 @@
                         </p>
                         <div class="dish-footer">
                             <div class="dish-tags">
-                                <span class="tag rating-tag" v-if="(dishRatingMap[dish.id]?.ratingCount ?? dish.ratingCount) > 0">★ {{ (dishRatingMap[dish.id]?.averageScore ?? dish.averageScore).toFixed(1) }}</span>
+                                <span
+                                    class="tag rating-tag"
+                                    v-if="
+                                        (dishRatingMap[dish.id]?.ratingCount ?? dish.ratingCount) >
+                                        0
+                                    "
+                                    >★
+                                    {{
+                                        (
+                                            dishRatingMap[dish.id]?.averageScore ??
+                                            dish.averageScore
+                                        ).toFixed(1)
+                                    }}</span
+                                >
                                 <span class="tag veg-tag" v-if="dish.isVegetarian">🥬 素食</span>
                                 <span class="tag spicy-tag" v-if="dish.spicyLevel > 0">
                                     {{ '🌶️'.repeat(dish.spicyLevel) }}
@@ -264,12 +279,23 @@
                     </div>
 
                     <!-- 浮動按鈕 (position:fixed, JS 定位) -->
-                    <button class="modal-close" :style="{ top: btnPos.top, right: btnPos.closeRight }" @click="closeModal">✕</button>
+                    <button
+                        class="modal-close"
+                        :style="{ top: btnPos.top, right: btnPos.closeRight }"
+                        @click="closeModal"
+                    >
+                        ✕
+                    </button>
                     <ShareMenu
                         v-model="shareMenuOpen"
                         share-url=""
                         share-title=""
-                        :style="{ position: 'fixed', top: btnPos.top, right: btnPos.shareRight, zIndex: 1100 }"
+                        :style="{
+                            position: 'fixed',
+                            top: btnPos.top,
+                            right: btnPos.shareRight,
+                            zIndex: 1100,
+                        }"
                         @select="openShareItem"
                     />
 
@@ -322,11 +348,15 @@
                             <!-- AI 食材資訊面板 -->
                             <Transition name="ingredient-panel">
                                 <div v-if="activeIngredient" class="ingredient-info-panel mb-8">
-                                    <div class="ingredient-info-title">✦ {{ activeIngredient }}</div>
+                                    <div class="ingredient-info-title">
+                                        ✦ {{ activeIngredient }}
+                                    </div>
                                     <div v-if="loadingIngredient" class="ingredient-loading">
                                         <span class="ingredient-spinner"></span> 正在查詢食材資料...
                                     </div>
-                                    <pre v-else class="ingredient-info-text">{{ ingredientInfo }}</pre>
+                                    <pre v-else class="ingredient-info-text">{{
+                                        ingredientInfo
+                                    }}</pre>
                                 </div>
                             </Transition>
                         </div>
@@ -359,7 +389,10 @@
                             <DishRatingSection
                                 :dish="selectedDish"
                                 :is-logged-in="authStore.isLoggedIn"
-                                @rated="({ dishId, averageScore, ratingCount }) => dishRatingMap[dishId] = { averageScore, ratingCount }"
+                                @rated="
+                                    ({ dishId, averageScore, ratingCount }) =>
+                                        (dishRatingMap[dishId] = { averageScore, ratingCount })
+                                "
                                 @login="openAuthModal"
                             />
                         </div>
@@ -406,8 +439,7 @@ const parseIngredients = (jsonString) => {
 
 const { show } = useToast()
 const authStore = useAuthStore()
-const openAuthModal = () =>
-    Modal.getOrCreateInstance(document.querySelector('#authModal')).show()
+const openAuthModal = () => Modal.getOrCreateInstance(document.querySelector('#authModal')).show()
 
 // ── Route / Router ────────────────────────────────────
 const route = useRoute()
@@ -426,13 +458,22 @@ const shareMenuOpen = ref(false)
 const openShareItem = async (type) => {
     const dish = selectedDish.value
     if (!dish) return
-    const dishUrl     = `${window.location.origin}/menu?dish=${dish.id}`
-    const encodedUrl  = encodeURIComponent(dishUrl)
+    const dishUrl = `${window.location.origin}/menu?dish=${dish.id}`
+    const encodedUrl = encodeURIComponent(dishUrl)
     const encodedText = encodeURIComponent(`${dish.dishName} NT$${dish.price.toLocaleString()}`)
     switch (type) {
-        case 'line':     window.open(`https://social-plugins.line.me/lineit/share?url=${encodedUrl}`, '_blank'); break
-        case 'facebook': window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`, '_blank'); break
-        case 'x':        window.open(`https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`, '_blank'); break
+        case 'line':
+            window.open(`https://social-plugins.line.me/lineit/share?url=${encodedUrl}`, '_blank')
+            break
+        case 'facebook':
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`, '_blank')
+            break
+        case 'x':
+            window.open(
+                `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`,
+                '_blank'
+            )
+            break
         case 'copy':
             try {
                 await navigator.clipboard.writeText(dishUrl)
@@ -444,7 +485,6 @@ const openShareItem = async (type) => {
     }
     shareMenuOpen.value = false
 }
-
 
 // ── Ingredient AI info ────────────────────────────────
 const activeIngredient = ref(null)
@@ -536,7 +576,7 @@ let _dishFingerprint = ''
 const getDishFingerprint = (data) =>
     [...data]
         .sort((a, b) => a.id - b.id)
-        .map(d => `${d.id}|${d.dishName}|${d.price}|${d.stockStatus}|${d.isActive ?? 1}`)
+        .map((d) => `${d.id}|${d.dishName}|${d.price}|${d.stockStatus}|${d.isActive ?? 1}`)
         .join(',')
 
 const pollMenu = async () => {
@@ -582,7 +622,9 @@ const loadFavorites = async () => {
                 favorites.value = await res.json()
                 return
             }
-        } catch { /* fall through */ }
+        } catch {
+            /* fall through */
+        }
     }
     favorites.value = []
 }
@@ -598,7 +640,7 @@ const toggleFavorite = async (dishId) => {
         const res = await apiFetch(`/Favorites/${dishId}`, { method: isFav ? 'DELETE' : 'POST' })
         if (!res.ok) throw new Error()
         if (isFav) {
-            favorites.value = favorites.value.filter(id => id !== dishId)
+            favorites.value = favorites.value.filter((id) => id !== dishId)
             show('🤍 已取消收藏', 'info')
         } else {
             favorites.value.push(dishId)
@@ -609,13 +651,16 @@ const toggleFavorite = async (dishId) => {
     }
 }
 
-watch(() => authStore.isLoggedIn, async (loggedIn) => {
-    if (loggedIn) {
-        await loadFavorites()
-    } else {
-        favorites.value = []
+watch(
+    () => authStore.isLoggedIn,
+    async (loggedIn) => {
+        if (loggedIn) {
+            await loadFavorites()
+        } else {
+            favorites.value = []
+        }
     }
-})
+)
 
 // ── Filter chip ripple ────────────────────────────────
 const ripple = (e) => {
@@ -647,7 +692,7 @@ const btnPos = reactive({ top: '1rem', closeRight: '1rem', shareRight: '3.5rem' 
 const updateBtnPos = () => {
     if (!modalBoxRef.value) return
     const r = modalBoxRef.value.getBoundingClientRect()
-    btnPos.top        = `${r.top  + 16}px`
+    btnPos.top = `${r.top + 16}px`
     btnPos.closeRight = `${window.innerWidth - r.right + 16}px`
     btnPos.shareRight = `${window.innerWidth - r.right + 56}px`
 }
@@ -674,14 +719,14 @@ watch(isModalOpen, async (open) => {
 
     // Chips 預先隱藏
     const chips = body.querySelectorAll('.attr-chip')
-    chips.forEach(chip => {
+    chips.forEach((chip) => {
         chip.style.transition = 'none'
         chip.style.opacity = '0'
         chip.style.transform = 'scale(0) translateY(6px)'
     })
 
     // Body sections 預先隱藏
-    sections.forEach(el => {
+    sections.forEach((el) => {
         el.style.transition = 'none'
         el.style.opacity = '0'
         el.style.transform = 'translateY(30px) scale(0.96)'
@@ -692,7 +737,8 @@ watch(isModalOpen, async (open) => {
     // Body sections 依序淡入
     sections.forEach((el, i) => {
         setTimeout(() => {
-            el.style.transition = 'opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1), transform 0.55s cubic-bezier(0.22, 1, 0.36, 1)'
+            el.style.transition =
+                'opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1), transform 0.55s cubic-bezier(0.22, 1, 0.36, 1)'
             el.style.opacity = '1'
             el.style.transform = 'translateY(0) scale(1)'
         }, i * 90)
@@ -701,11 +747,15 @@ watch(isModalOpen, async (open) => {
     // Chips 彈跳進場
     const chipsDelay = (sections.length - 1) * 90 + 180
     chips.forEach((chip, i) => {
-        setTimeout(() => {
-            chip.style.transition = 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease'
-            chip.style.opacity = '1'
-            chip.style.transform = 'scale(1) translateY(0)'
-        }, chipsDelay + i * 55)
+        setTimeout(
+            () => {
+                chip.style.transition =
+                    'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease'
+                chip.style.opacity = '1'
+                chip.style.transform = 'scale(1) translateY(0)'
+            },
+            chipsDelay + i * 55
+        )
     })
 })
 
@@ -730,7 +780,9 @@ const openModal = async (dish) => {
             const data = await res.json()
             dishRatingMap[dish.id] = data
         }
-    } catch { /* 忽略評分載入錯誤 */ }
+    } catch {
+        /* 忽略評分載入錯誤 */
+    }
 }
 
 const closeModal = () => {
@@ -754,8 +806,7 @@ const spicyLabel = (level) => {
 
 const formatImageUrl = (url) => {
     if (!url) return null
-    // 僅接受本地 /images/ 路徑，外部 URL 一律 fallback 至文字佔位
-    return url.startsWith('/images/') ? url : null
+    return url
 }
 
 // ── API ──────────────────────────────────────────────
@@ -828,7 +879,7 @@ onMounted(async () => {
     // 深層連結：?dish=id 自動開 Modal
     const dishParam = route.query.dish
     if (dishParam) {
-        const dish = dishes.value.find(d => String(d.id) === dishParam)
+        const dish = dishes.value.find((d) => String(d.id) === dishParam)
         if (dish) openModal(dish)
     }
 })
@@ -876,8 +927,8 @@ onUnmounted(() => {
     inset: 0;
     background: linear-gradient(
         to bottom,
-        rgba(24, 11, 6, 0.80) 0%,
-        rgba(24, 11, 6, 0.70) 55%,
+        rgba(24, 11, 6, 0.8) 0%,
+        rgba(24, 11, 6, 0.7) 55%,
         var(--eat-surface) 100%
     );
 }
@@ -1014,7 +1065,10 @@ onUnmounted(() => {
     pointer-events: none;
 }
 @keyframes ripple-expand {
-    to { transform: translate(-50%, -50%) scale(20); opacity: 0; }
+    to {
+        transform: translate(-50%, -50%) scale(20);
+        opacity: 0;
+    }
 }
 .filter-chip:hover {
     border-color: rgba(227, 199, 107, 0.35);
@@ -1161,7 +1215,10 @@ onUnmounted(() => {
 .dish-card:hover {
     border-color: rgba(227, 199, 107, 0.2);
     transform: translateY(-10px);
-    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(227, 199, 107, 0.18), 0 0 24px rgba(227, 199, 107, 0.08);
+    box-shadow:
+        0 20px 48px rgba(0, 0, 0, 0.55),
+        0 0 0 1px rgba(227, 199, 107, 0.18),
+        0 0 24px rgba(227, 199, 107, 0.08);
 }
 
 /* ── Reflection layer ── */
@@ -1172,7 +1229,7 @@ onUnmounted(() => {
     border-radius: inherit;
     background: radial-gradient(
         circle at var(--mx, 50%) var(--my, 50%),
-        rgba(227, 199, 107, 0.10) 0%,
+        rgba(227, 199, 107, 0.1) 0%,
         rgba(227, 199, 107, 0.03) 40%,
         transparent 65%
     );
@@ -1304,8 +1361,14 @@ onUnmounted(() => {
     transform: scale(1.2) !important;
 }
 @keyframes badge-pop {
-    from { opacity: 0; transform: scale(0.6); }
-    to   { opacity: 1; transform: scale(1); }
+    from {
+        opacity: 0;
+        transform: scale(0.6);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 .badge-rec {
     background-color: rgba(227, 199, 107, 0.9);
@@ -1805,9 +1868,15 @@ onUnmounted(() => {
     white-space: nowrap;
     width: 0%;
 }
-.avg-star.full .avg-star-fg  { width: 100%; }
-.avg-star.half .avg-star-fg  { width: 50%; }
-.avg-star.empty .avg-star-fg { width: 0%; }
+.avg-star.full .avg-star-fg {
+    width: 100%;
+}
+.avg-star.half .avg-star-fg {
+    width: 50%;
+}
+.avg-star.empty .avg-star-fg {
+    width: 0%;
+}
 .avg-star-label {
     font-family: var(--font-label);
     font-size: 0.75rem;
@@ -1935,42 +2004,121 @@ onUnmounted(() => {
 }
 
 /* ── Share button (同 SetMeal 樣式) ── */
-.share-wrap { position: fixed; z-index: 1100; }
-.modal-share {
-    width: 32px; height: 32px; border-radius: 50%;
-    background: rgba(0, 0, 0, 0.5); border: none; color: rgba(255, 255, 255, 0.8);
-    cursor: pointer; display: flex; align-items: center; justify-content: center;
-    transition: background 0.2s, color 0.2s;
+.share-wrap {
+    position: fixed;
+    z-index: 1100;
 }
-.modal-share:hover { background: rgba(0, 0, 0, 0.8); color: var(--eat-primary); }
+.modal-share {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+        background 0.2s,
+        color 0.2s;
+}
+.modal-share:hover {
+    background: rgba(0, 0, 0, 0.8);
+    color: var(--eat-primary);
+}
 .share-menu {
-    position: absolute; top: calc(100% + 0.45rem); right: 0;
-    background: rgba(18, 8, 4, 0.96); backdrop-filter: blur(16px);
-    border: 1px solid rgba(227, 199, 107, 0.22); border-radius: 12px;
-    padding: 0.35rem; display: flex; flex-direction: column; gap: 0.15rem;
-    min-width: 148px; box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
+    position: absolute;
+    top: calc(100% + 0.45rem);
+    right: 0;
+    background: rgba(18, 8, 4, 0.96);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(227, 199, 107, 0.22);
+    border-radius: 12px;
+    padding: 0.35rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    min-width: 148px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
 }
 .share-item {
-    display: flex; align-items: center; gap: 0.6rem;
-    padding: 0.48rem 0.7rem; border: none; background: none; border-radius: 8px;
-    color: rgba(249, 221, 211, 0.82); font-family: var(--font-label);
-    font-size: 0.78rem; letter-spacing: 0.04em; cursor: pointer;
-    transition: background 0.15s; white-space: nowrap; width: 100%; text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.48rem 0.7rem;
+    border: none;
+    background: none;
+    border-radius: 8px;
+    color: rgba(249, 221, 211, 0.82);
+    font-family: var(--font-label);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: background 0.15s;
+    white-space: nowrap;
+    width: 100%;
+    text-align: left;
 }
-.share-item:hover { background: rgba(255, 255, 255, 0.06); }
+.share-item:hover {
+    background: rgba(255, 255, 255, 0.06);
+}
 .share-icon {
-    width: 22px; height: 22px; border-radius: 6px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 0.72rem; font-weight: 700; flex-shrink: 0; line-height: 1;
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.72rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    line-height: 1;
 }
-.si-line { background: #06C755; color: white; border-radius: 50%; }
-.si-fb   { background: #1877F2; color: white; border-radius: 50%; font-size: 0.88rem; }
-.si-x    { background: #0f0f0f; color: white; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2); font-size: 0.75rem; }
-.si-copy { background: rgba(227,199,107,0.12); color: var(--eat-primary); border: 1px solid rgba(227,199,107,0.3); border-radius: 6px; }
-.share-menu-enter-active { transition: opacity 0.18s ease, transform 0.18s cubic-bezier(0.22, 1, 0.36, 1); }
-.share-menu-leave-active { transition: opacity 0.12s ease, transform 0.12s ease; }
-.share-menu-enter-from   { opacity: 0; transform: scale(0.88) translateY(-8px); transform-origin: top right; }
-.share-menu-leave-to     { opacity: 0; transform: scale(0.92) translateY(-4px); transform-origin: top right; }
+.si-line {
+    background: #06c755;
+    color: white;
+    border-radius: 50%;
+}
+.si-fb {
+    background: #1877f2;
+    color: white;
+    border-radius: 50%;
+    font-size: 0.88rem;
+}
+.si-x {
+    background: #0f0f0f;
+    color: white;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 0.75rem;
+}
+.si-copy {
+    background: rgba(227, 199, 107, 0.12);
+    color: var(--eat-primary);
+    border: 1px solid rgba(227, 199, 107, 0.3);
+    border-radius: 6px;
+}
+.share-menu-enter-active {
+    transition:
+        opacity 0.18s ease,
+        transform 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.share-menu-leave-active {
+    transition:
+        opacity 0.12s ease,
+        transform 0.12s ease;
+}
+.share-menu-enter-from {
+    opacity: 0;
+    transform: scale(0.88) translateY(-8px);
+    transform-origin: top right;
+}
+.share-menu-leave-to {
+    opacity: 0;
+    transform: scale(0.92) translateY(-4px);
+    transform-origin: top right;
+}
 
 /* ── Ingredient AI panel ── */
 .ingredient-hint {
@@ -1985,7 +2133,10 @@ onUnmounted(() => {
 .ingredient-card {
     cursor: pointer;
     border: 1px solid transparent;
-    transition: border-color 0.2s, background-color 0.2s, transform 0.2s;
+    transition:
+        border-color 0.2s,
+        background-color 0.2s,
+        transform 0.2s;
 }
 .ingredient-card:hover {
     border-color: rgba(227, 199, 107, 0.2);
@@ -2034,10 +2185,24 @@ onUnmounted(() => {
     white-space: pre-wrap;
     margin: 0;
 }
-.ingredient-panel-enter-active { transition: opacity 0.3s, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1); }
-.ingredient-panel-leave-active { transition: opacity 0.2s, transform 0.2s; }
-.ingredient-panel-enter-from   { opacity: 0; transform: translateY(-8px); }
-.ingredient-panel-leave-to     { opacity: 0; transform: translateY(-4px); }
+.ingredient-panel-enter-active {
+    transition:
+        opacity 0.3s,
+        transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.ingredient-panel-leave-active {
+    transition:
+        opacity 0.2s,
+        transform 0.2s;
+}
+.ingredient-panel-enter-from {
+    opacity: 0;
+    transform: translateY(-8px);
+}
+.ingredient-panel-leave-to {
+    opacity: 0;
+    transform: translateY(-4px);
+}
 
 /* ── Return to SetMeal button ── */
 .return-setmeal-btn {
@@ -2055,7 +2220,10 @@ onUnmounted(() => {
     padding: 0.55rem 1.4rem;
     cursor: pointer;
     backdrop-filter: blur(12px);
-    transition: background 0.25s, border-color 0.25s, transform 0.2s;
+    transition:
+        background 0.25s,
+        border-color 0.25s,
+        transform 0.2s;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 .return-setmeal-btn:hover {
@@ -2063,10 +2231,24 @@ onUnmounted(() => {
     border-color: var(--eat-primary);
     transform: translateX(-2px);
 }
-.return-btn-enter-active { transition: opacity 0.3s, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
-.return-btn-leave-active { transition: opacity 0.2s, transform 0.2s ease; }
-.return-btn-enter-from  { opacity: 0; transform: translateX(-12px); }
-.return-btn-leave-to    { opacity: 0; transform: translateX(-8px); }
+.return-btn-enter-active {
+    transition:
+        opacity 0.3s,
+        transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.return-btn-leave-active {
+    transition:
+        opacity 0.2s,
+        transform 0.2s ease;
+}
+.return-btn-enter-from {
+    opacity: 0;
+    transform: translateX(-12px);
+}
+.return-btn-leave-to {
+    opacity: 0;
+    transform: translateX(-8px);
+}
 
 /* ── 留言區 ── */
 .review-loading {
@@ -2128,7 +2310,9 @@ onUnmounted(() => {
     letter-spacing: 0.06em;
     padding: 0.35rem 1rem;
     cursor: pointer;
-    transition: border-color 0.2s, color 0.2s;
+    transition:
+        border-color 0.2s,
+        color 0.2s;
     align-self: flex-start;
 }
 .review-more-btn:hover {
@@ -2193,7 +2377,9 @@ onUnmounted(() => {
     letter-spacing: 0.08em;
     padding: 0.45rem 1.25rem;
     cursor: pointer;
-    transition: background 0.2s, border-color 0.2s;
+    transition:
+        background 0.2s,
+        border-color 0.2s;
     white-space: nowrap;
 }
 .review-submit-btn:hover:not(:disabled) {
@@ -2230,7 +2416,10 @@ onUnmounted(() => {
     text-transform: uppercase;
     padding: 0.3rem 0.9rem;
     cursor: pointer;
-    transition: background 0.2s, border-color 0.2s, color 0.2s;
+    transition:
+        background 0.2s,
+        border-color 0.2s,
+        color 0.2s;
     white-space: nowrap;
     flex-shrink: 0;
 }
