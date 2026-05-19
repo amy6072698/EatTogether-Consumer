@@ -4,40 +4,20 @@
         <div v-if="step < 4" class="step-banner">
             <div class="step-items">
                 <div :class="['step-dot', step === 1 ? 'active' : 'done']">
-                    <svg
-                        v-if="step > 1"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="12"
-                        height="12"
-                        fill="currentColor"
-                        viewBox="0 0 16 16"
-                    >
-                        <path
-                            d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"
-                        />
+                    <svg v-if="step > 1" xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
                     </svg>
                     <span v-else>1</span>
                 </div>
                 <span :class="['step-lbl', step === 1 ? 'active' : 'done-lbl']">選餐</span>
                 <div class="step-line"></div>
                 <div :class="['step-dot', step === 2 ? 'active' : step > 2 ? 'done' : '']">
-                    <svg
-                        v-if="step > 2"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="12"
-                        height="12"
-                        fill="currentColor"
-                        viewBox="0 0 16 16"
-                    >
-                        <path
-                            d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"
-                        />
+                    <svg v-if="step > 2" xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
                     </svg>
                     <span v-else>2</span>
                 </div>
-                <span :class="['step-lbl', step === 2 ? 'active' : step > 2 ? 'done-lbl' : '']"
-                    >填寫資料</span
-                >
+                <span :class="['step-lbl', step === 2 ? 'active' : step > 2 ? 'done-lbl' : '']">填寫資料</span>
                 <div class="step-line"></div>
                 <div :class="['step-dot', step === 3 ? 'active' : '']">3</div>
                 <span :class="['step-lbl', step === 3 ? 'active' : '']">確認送出</span>
@@ -45,19 +25,9 @@
             <!-- 取餐時段顯示 -->
             <div class="banner-right">
                 <div v-if="pickupTime" class="pickup-pill">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="12"
-                        height="12"
-                        fill="currentColor"
-                        viewBox="0 0 16 16"
-                    >
-                        <path
-                            d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"
-                        />
-                        <path
-                            d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"
-                        />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
+                        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />
                     </svg>
                     取餐時段：<strong>{{ pickupTime }}</strong>
                 </div>
@@ -69,12 +39,7 @@
             <!-- 手機分類捲動列 -->
             <div class="mobile-cat-bar">
                 <nav class="mobile-cat-tabs">
-                    <button
-                        v-for="cat in sidebarCategories"
-                        :key="cat.key"
-                        :class="['mobile-cat-btn', { active: activeSidebarCat === cat.key }]"
-                        @click="scrollToSection(cat.key)"
-                    >
+                    <button v-for="cat in sidebarCategories" :key="cat.key" :class="['mobile-cat-btn', { active: activeSidebarCat === cat.key }]" @click="scrollToSection(cat.key)">
                         {{ cat.label }}<span class="cat-badge">{{ cat.count }}</span>
                     </button>
                 </nav>
@@ -83,25 +48,12 @@
             <!-- 左 Sidebar -->
             <aside class="out-sidebar">
                 <div class="sidebar-search-wrap">
-                    <svg
-                        style="color: rgba(208, 197, 181, 0.4); flex-shrink: 0"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="13"
-                        height="13"
-                        fill="currentColor"
-                        viewBox="0 0 16 16"
-                    >
+                    <svg style="color: rgba(208, 197, 181, 0.4); flex-shrink: 0" xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" viewBox="0 0 16 16">
                         <path
                             d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
                         />
                     </svg>
-                    <input
-                        v-model="searchQuery"
-                        type="text"
-                        class="input-line"
-                        style="font-size: 0.85rem"
-                        placeholder="搜尋料理名稱…"
-                    />
+                    <input v-model="searchQuery" type="text" class="input-line" style="font-size: 0.85rem" placeholder="搜尋料理名稱…" />
                 </div>
                 <nav class="sidebar-nav">
                     <template v-for="(cat, idx) in sidebarCategories" :key="cat.key">
@@ -109,12 +61,8 @@
                             v-if="
                                 cat.isDividerBefore ||
                                 (idx > 0 &&
-                                    !['今日推薦', '主廚特選', '我的收藏', '歷史訂單'].includes(
-                                        cat.key
-                                    ) &&
-                                    ['今日推薦', '主廚特選', '我的收藏', '歷史訂單'].includes(
-                                        sidebarCategories[idx - 1].key
-                                    ))
+                                    !['今日推薦', '主廚特選', '我的收藏', '歷史訂單'].includes(cat.key) &&
+                                    ['今日推薦', '主廚特選', '我的收藏', '歷史訂單'].includes(sidebarCategories[idx - 1].key))
                             "
                             class="cat-divider"
                         ></div>
@@ -123,12 +71,7 @@
                                 'cat-link',
                                 { active: activeSidebarCat === cat.key },
                                 {
-                                    'cat-special': [
-                                        '今日推薦',
-                                        '主廚特選',
-                                        '我的收藏',
-                                        '歷史訂單',
-                                    ].includes(cat.key),
+                                    'cat-special': ['今日推薦', '主廚特選', '我的收藏', '歷史訂單'].includes(cat.key),
                                 },
                             ]"
                             @click="scrollToSection(cat.key)"
@@ -145,71 +88,30 @@
                 <!-- Toolbar -->
                 <div class="toolbar">
                     <div class="mobile-search-wrap">
-                        <svg
-                            style="color: rgba(208, 197, 181, 0.4); flex-shrink: 0"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="13"
-                            height="13"
-                            fill="currentColor"
-                            viewBox="0 0 16 16"
-                        >
+                        <svg style="color: rgba(208, 197, 181, 0.4); flex-shrink: 0" xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" viewBox="0 0 16 16">
                             <path
                                 d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
                             />
                         </svg>
-                        <input
-                            v-model="searchQuery"
-                            type="text"
-                            class="input-line"
-                            style="font-size: 0.85rem"
-                            placeholder="搜尋料理名稱…"
-                        />
+                        <input v-model="searchQuery" type="text" class="input-line" style="font-size: 0.85rem" placeholder="搜尋料理名稱…" />
                     </div>
                     <div class="toolbar-row">
                         <div class="chips-wrap">
                             <span class="chip-label">篩選條件：</span>
-                            <button
-                                @click="toggleChip('veg')"
-                                :class="['chip-btn', { active: activeChip === 'veg' }]"
-                            >
-                                素食
-                            </button>
-                            <button
-                                @click="toggleChip('spicy')"
-                                :class="['chip-btn', { active: activeChip === 'spicy' }]"
-                            >
-                                辣味
-                            </button>
+                            <button @click="toggleChip('veg')" :class="['chip-btn', { active: activeChip === 'veg' }]">素食</button>
+                            <button @click="toggleChip('spicy')" :class="['chip-btn', { active: activeChip === 'spicy' }]">辣味</button>
                         </div>
                         <div class="view-toggle">
-                            <button
-                                @click="curView = 'list'"
-                                :class="['view-btn', { active: curView === 'list' }]"
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="13"
-                                    height="13"
-                                    fill="currentColor"
-                                    viewBox="0 0 16 16"
-                                >
+                            <button @click="curView = 'list'" :class="['view-btn', { active: curView === 'list' }]">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" viewBox="0 0 16 16">
                                     <path
                                         fill-rule="evenodd"
                                         d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
                                     />
                                 </svg>
                             </button>
-                            <button
-                                @click="curView = 'grid'"
-                                :class="['view-btn', { active: curView === 'grid' }]"
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="13"
-                                    height="13"
-                                    fill="currentColor"
-                                    viewBox="0 0 16 16"
-                                >
+                            <button @click="curView = 'grid'" :class="['view-btn', { active: curView === 'grid' }]">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" viewBox="0 0 16 16">
                                     <path
                                         d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm8 0A1.5 1.5 0 0 1 10.5 9h3A1.5 1.5 0 0 1 15 10.5v3A1.5 1.5 0 0 1 13.5 15h-3A1.5 1.5 0 0 1 9 13.5v-3z"
                                     />
@@ -228,21 +130,10 @@
                     <!-- 歷史訂單 -->
                     <template v-if="activeSidebarCat === '歷史訂單'">
                         <h2 class="section-title">歷史訂單</h2>
-                        <div
-                            v-for="order in orderHistory"
-                            :key="order.orderNumber"
-                            class="history-card"
-                        >
+                        <div v-for="order in orderHistory" :key="order.orderNumber" class="history-card">
                             <div class="history-meta">
-                                <span
-                                    class="font-label"
-                                    style="color: rgba(208, 197, 181, 0.5); font-size: 0.7rem"
-                                    >訂單編號：{{ order.orderNumber }}</span
-                                >
-                                <span
-                                    class="font-label"
-                                    style="color: rgba(208, 197, 181, 0.5); font-size: 0.7rem"
-                                >
+                                <span class="font-label" style="color: rgba(208, 197, 181, 0.5); font-size: 0.7rem">訂單編號：{{ order.orderNumber }}</span>
+                                <span class="font-label" style="color: rgba(208, 197, 181, 0.5); font-size: 0.7rem">
                                     下單時間：{{
                                         new Date(order.orderAt).toLocaleString('zh-TW', {
                                             year: 'numeric',
@@ -255,58 +146,20 @@
                                 </span>
                             </div>
                             <div class="history-items">
-                                <div
-                                    v-for="item in order.items?.filter((i) => i)"
-                                    :key="item.productName"
-                                    class="history-item-wrap"
-                                >
-                                    <div
-                                        class="font-body"
-                                        style="color: #f9ddd3; font-size: 0.9rem"
-                                    >
-                                        <span
-                                            v-if="item.isSetMeal"
-                                            class="history-setmeal-badge font-label"
-                                            >套餐</span
-                                        >
+                                <div v-for="item in order.items?.filter((i) => i)" :key="item.productName" class="history-item-wrap">
+                                    <div class="font-body" style="color: #f9ddd3; font-size: 0.9rem">
+                                        <span v-if="item.isSetMeal" class="history-setmeal-badge font-label">套餐</span>
                                         {{ item.qty }} x {{ item.productName }}
-                                        <span
-                                            v-if="item.note"
-                                            style="
-                                                color: rgba(208, 197, 181, 0.5);
-                                                font-size: 0.8rem;
-                                            "
-                                            >（{{ item.note }}）</span
-                                        >
+                                        <span v-if="item.note" style="color: rgba(208, 197, 181, 0.5); font-size: 0.8rem">（{{ item.note }}）</span>
                                     </div>
                                     <!-- 套餐子項目 -->
-                                    <div
-                                        v-if="item.isSetMeal && item.subItems?.length"
-                                        class="history-subitems"
-                                    >
-                                        <span
-                                            v-for="sub in item.subItems"
-                                            :key="sub.productName"
-                                            class="font-body history-subitem"
-                                            >{{ sub.qty }} x {{ sub.productName }}</span
-                                        >
+                                    <div v-if="item.isSetMeal && item.subItems?.length" class="history-subitems">
+                                        <span v-for="sub in item.subItems" :key="sub.productName" class="font-body history-subitem">{{ sub.qty }} x {{ sub.productName }}</span>
                                     </div>
                                 </div>
-                                <div
-                                    v-if="order.orderNote"
-                                    class="font-body"
-                                    style="
-                                        color: rgba(208, 197, 181, 0.5);
-                                        font-size: 0.8rem;
-                                        margin-top: 0.25rem;
-                                    "
-                                >
-                                    備註：{{ order.orderNote }}
-                                </div>
+                                <div v-if="order.orderNote" class="font-body" style="color: rgba(208, 197, 181, 0.5); font-size: 0.8rem; margin-top: 0.25rem">備註：{{ order.orderNote }}</div>
                             </div>
-                            <button class="history-reorder-btn font-label" @click="reorder(order)">
-                                再點一次
-                            </button>
+                            <button class="history-reorder-btn font-label" @click="reorder(order)">再點一次</button>
                         </div>
                     </template>
 
@@ -314,127 +167,57 @@
                         <div v-show="section.dishes.length > 0" :id="'out-sec-' + section.key">
                             <h2 class="section-title">{{ section.label }}</h2>
                             <div class="dishes-wrap" :class="{ 'grid-view': curView === 'grid' }">
-                                <div
-                                    v-for="dish in section.dishes"
-                                    :key="dish.productId"
-                                    class="dish-row mb-3"
-                                    :class="{ 'dish-row-grid': curView === 'grid' }"
-                                    @click="openDetail(dish)"
-                                >
+                                <div v-for="dish in section.dishes" :key="dish.productId" class="dish-row mb-3" :class="{ 'dish-row-grid': curView === 'grid' }" @click="openDetail(dish)">
                                     <img
                                         v-if="dish.imageUrl && !imgErrors.has(dish.productId)"
                                         class="dish-img"
-                                        :src="
-                                            imgFallback.get(dish.productId) ||
-                                            resolveImage(dish.imageUrl)
-                                        "
+                                        :src="imgFallback.get(dish.productId) || resolveImage(dish.imageUrl)"
                                         :alt="dish.productName"
                                         @error="handleImgError(dish)"
                                     />
                                     <div v-else class="dish-img dish-img-placeholder">🍽️</div>
-                                    <div
-                                        class="dish-content"
-                                        :class="{ 'dish-content-grid': curView === 'grid' }"
-                                    >
-                                        <h3
-                                            class="font-headline dish-name italic"
-                                            style="color: #e3c76b"
-                                        >
+                                    <div class="dish-content" :class="{ 'dish-content-grid': curView === 'grid' }">
+                                        <h3 class="font-headline dish-name italic" style="color: #e3c76b">
                                             {{ dish.productName }}
                                         </h3>
-                                        <p
-                                            class="font-body text-xs italic leading-relaxed"
-                                            style="color: rgba(249, 221, 211, 0.5); margin: 0"
-                                        >
+                                        <p class="font-body text-xs italic leading-relaxed" style="color: rgba(249, 221, 211, 0.5); margin: 0">
                                             {{ dish.description }}
                                         </p>
                                         <template v-if="curView !== 'grid'">
                                             <div class="dish-badges">
-                                                <span
-                                                    v-if="dish.isRecommended"
-                                                    class="badge badge-new"
-                                                    >推薦</span
-                                                >
-                                                <span v-if="dish.isPopular" class="badge badge-chef"
-                                                    >主廚特選</span
-                                                >
-                                                <span
-                                                    v-if="dish.isVegetarian"
-                                                    class="badge badge-veg"
-                                                    >素</span
-                                                >
-                                                <span
-                                                    v-if="dish.spicyLevel > 0"
-                                                    class="badge badge-spicy"
-                                                    >辣</span
-                                                >
+                                                <span v-if="dish.isRecommended" class="badge badge-new">推薦</span>
+                                                <span v-if="dish.isPopular" class="badge badge-chef">主廚特選</span>
+                                                <span v-if="dish.isVegetarian" class="badge badge-veg">素</span>
+                                                <span v-if="dish.spicyLevel > 0" class="badge badge-spicy">辣</span>
                                             </div>
                                             <div class="list-footer" @click.stop="">
-                                                <p
-                                                    class="font-label text-xs tracking-wider"
-                                                    style="color: #d5b478"
-                                                >
-                                                    NT$ {{ dish.unitPrice?.toLocaleString() }}
-                                                </p>
+                                                <p class="font-label text-xs tracking-wider" style="color: #d5b478">NT$ {{ dish.unitPrice?.toLocaleString() }}</p>
                                                 <div class="qty-col">
-                                                    <button
-                                                        class="qty-btn"
-                                                        @click.stop="handleRemove(dish)"
-                                                    >
-                                                        −
-                                                    </button>
+                                                    <button class="qty-btn" @click.stop="handleRemove(dish)">−</button>
                                                     <span
                                                         class="font-label text-xs qty-num"
                                                         :class="{
-                                                            active:
-                                                                (store.cart[dish.productId] || 0) >
-                                                                0,
+                                                            active: (store.cart[dish.productId] || 0) > 0,
                                                         }"
                                                         style="font-size: 20px"
                                                         >{{ store.cart[dish.productId] || 0 }}</span
                                                     >
-                                                    <button
-                                                        class="qty-btn"
-                                                        @click.stop="openDetail(dish)"
-                                                    >
-                                                        +
-                                                    </button>
+                                                    <button class="qty-btn" @click.stop="openDetail(dish)">+</button>
                                                 </div>
                                             </div>
                                         </template>
                                     </div>
                                     <!-- 網格視圖底部 -->
-                                    <div
-                                        v-if="curView === 'grid'"
-                                        class="grid-footer"
-                                        @click.stop=""
-                                    >
+                                    <div v-if="curView === 'grid'" class="grid-footer" @click.stop="">
                                         <div class="dish-badges" style="justify-content: center">
-                                            <span v-if="dish.isRecommended" class="badge badge-new"
-                                                >推薦</span
-                                            >
-                                            <span v-if="dish.isPopular" class="badge badge-chef"
-                                                >主廚特選</span
-                                            >
-                                            <span v-if="dish.isVegetarian" class="badge badge-veg"
-                                                >素</span
-                                            >
-                                            <span
-                                                v-if="dish.spicyLevel > 0"
-                                                class="badge badge-spicy"
-                                                >辣</span
-                                            >
+                                            <span v-if="dish.isRecommended" class="badge badge-new">推薦</span>
+                                            <span v-if="dish.isPopular" class="badge badge-chef">主廚特選</span>
+                                            <span v-if="dish.isVegetarian" class="badge badge-veg">素</span>
+                                            <span v-if="dish.spicyLevel > 0" class="badge badge-spicy">辣</span>
                                         </div>
-                                        <p class="font-label grid-price mb-2">
-                                            NT$ {{ dish.unitPrice?.toLocaleString() }}
-                                        </p>
+                                        <p class="font-label grid-price mb-2">NT$ {{ dish.unitPrice?.toLocaleString() }}</p>
                                         <div class="qty-row">
-                                            <button
-                                                class="qty-btn"
-                                                @click.stop="handleRemove(dish)"
-                                            >
-                                                −
-                                            </button>
+                                            <button class="qty-btn" @click.stop="handleRemove(dish)">−</button>
                                             <span
                                                 class="font-label text-xs qty-num"
                                                 :class="{
@@ -443,9 +226,7 @@
                                                 style="font-size: 20px"
                                                 >{{ store.cart[dish.productId] || 0 }}</span
                                             >
-                                            <button class="qty-btn" @click.stop="openDetail(dish)">
-                                                +
-                                            </button>
+                                            <button class="qty-btn" @click.stop="openDetail(dish)">+</button>
                                         </div>
                                     </div>
                                 </div>
@@ -459,21 +240,9 @@
             <!-- 右：購物車 -->
             <aside class="out-cart" :class="{ 'cart-open': cartOpen }">
                 <div class="cart-header candle-glow">
-                    <span
-                        class="font-headline"
-                        style="color: #e3c76b; font-size: 1.1rem; line-height: 1"
-                        >外帶訂單</span
-                    >
+                    <span class="font-headline" style="color: #e3c76b; font-size: 1.1rem; line-height: 1">外帶訂單</span>
                     <div style="display: flex; align-items: center; gap: 0.75rem">
-                        <span
-                            class="font-label"
-                            style="
-                                color: rgba(208, 197, 181, 0.5);
-                                font-size: 0.75rem;
-                                letter-spacing: 0.12em;
-                            "
-                            >共 {{ store.totalItems }} 項</span
-                        >
+                        <span class="font-label" style="color: rgba(208, 197, 181, 0.5); font-size: 0.75rem; letter-spacing: 0.12em">共 {{ store.totalItems }} 項</span>
                         <button @click="cartOpen = false" class="cart-close-btn">✕</button>
                     </div>
                 </div>
@@ -481,30 +250,13 @@
                 <!-- 取餐時段 -->
                 <div class="cart-pickup">
                     <label class="font-label pickup-label" :class="{ 'pickup-error': pickupError }">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="12"
-                            height="12"
-                            fill="currentColor"
-                            viewBox="0 0 16 16"
-                        >
-                            <path
-                                d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"
-                            />
-                            <path
-                                d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"
-                            />
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
+                            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />
                         </svg>
                         取餐時段
                     </label>
-                    <select
-                        v-model="pickupTime"
-                        :class="[
-                            'pickup-select font-label',
-                            { 'pickup-select-error': pickupError },
-                        ]"
-                        @change="pickupError = false"
-                    >
+                    <select v-model="pickupTime" :class="['pickup-select font-label', { 'pickup-select-error': pickupError }]" @change="pickupError = false">
                         <option value="" disabled style="padding: 0">選擇時段…</option>
                         <option v-for="slot in pickupTimeOptions" :key="slot" :value="slot">
                             {{ slot }}
@@ -515,82 +267,31 @@
 
                 <!-- 餐點清單 -->
                 <div class="cart-items">
-                    <div
-                        v-if="store.totalItems === 0"
-                        style="text-align: center; padding: 3rem 1rem"
-                    >
+                    <div v-if="store.totalItems === 0" style="text-align: center; padding: 3rem 1rem">
                         <p style="font-size: 2.5rem; opacity: 0.15; margin-bottom: 0.75rem">🛍️</p>
-                        <p class="font-body" style="color: rgba(249, 221, 211, 0.4)">
-                            尚未加入餐點
-                        </p>
-                        <p
-                            class="font-label"
-                            style="
-                                color: rgba(208, 197, 181, 0.35);
-                                font-size: 0.7rem;
-                                letter-spacing: 0.18em;
-                                text-transform: uppercase;
-                                margin-top: 0.5rem;
-                            "
-                        >
-                            點擊料理即可加入
-                        </p>
+                        <p class="font-body" style="color: rgba(249, 221, 211, 0.4)">尚未加入餐點</p>
+                        <p class="font-label" style="color: rgba(208, 197, 181, 0.35); font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; margin-top: 0.5rem">點擊料理即可加入</p>
                     </div>
-                    <div
-                        v-for="item in cartItemsWithDetails"
-                        :key="item.lineId"
-                        :class="['order-item', { 'setmeal-order-item': item.isSetMeal }]"
-                    >
+                    <div v-for="item in cartItemsWithDetails" :key="item.lineId" :class="['order-item', { 'setmeal-order-item': item.isSetMeal }]">
                         <div class="order-item-top">
-                            <div
-                                class="order-item-name-wrap"
-                                @click="openCartItemEdit(item)"
-                                title="點擊編輯"
-                            >
-                                <div v-if="item.isSetMeal" class="setmeal-badge font-label">
-                                    🍱 套餐
-                                </div>
+                            <div class="order-item-name-wrap" @click="openCartItemEdit(item)" title="點擊編輯">
+                                <div v-if="item.isSetMeal" class="setmeal-badge font-label">🍱 套餐</div>
                                 <p class="font-headline order-item-name" style="color: #e3c76b">
                                     {{ item.productName }}
                                 </p>
                                 <div v-if="item.isSetMeal" class="setmeal-subitems">
-                                    <span
-                                        v-for="f in item.setMealData?.fixedItems"
-                                        :key="'f-' + f.dishId"
-                                        class="font-label setmeal-subitem"
-                                        >{{ f.dishName }} × {{ f.quantity }}</span
-                                    >
-                                    <span
-                                        v-for="s in item.setMealData?.selectedOptions"
-                                        :key="'s-' + s.dishId"
-                                        class="font-label setmeal-subitem"
-                                        >{{ s.dishName }} × {{ s.qty }}</span
-                                    >
+                                    <span v-for="f in item.setMealData?.fixedItems" :key="'f-' + f.dishId" class="font-label setmeal-subitem">{{ f.dishName }} × {{ f.quantity }}</span>
+                                    <span v-for="s in item.setMealData?.selectedOptions" :key="'s-' + s.dishId" class="font-label setmeal-subitem">{{ s.dishName }} × {{ s.qty }}</span>
                                 </div>
                                 <p v-if="item.note" class="font-body order-item-note">
                                     {{ item.note }}
                                 </p>
                             </div>
                             <div class="order-item-right">
-                                <span class="font-label order-item-price"
-                                    >NT$ {{ (item.unitPrice * item.qty).toLocaleString() }}</span
-                                >
-                                <button
-                                    class="qty-btn-order"
-                                    @click.stop="store.removeLineItem(item.lineId)"
-                                >
-                                    −
-                                </button>
-                                <span class="font-label order-item-qty" style="color: #f9ddd3">{{
-                                    item.qty
-                                }}</span>
-                                <button
-                                    v-if="!item.isSetMeal"
-                                    class="qty-btn-order"
-                                    @click.stop="store.addItem(item.productId, item.note)"
-                                >
-                                    +
-                                </button>
+                                <span class="font-label order-item-price">NT$ {{ (item.unitPrice * item.qty).toLocaleString() }}</span>
+                                <button class="qty-btn-order" @click.stop="store.removeLineItem(item.lineId)">−</button>
+                                <span class="font-label order-item-qty" style="color: #f9ddd3">{{ item.qty }}</span>
+                                <button v-if="!item.isSetMeal" class="qty-btn-order" @click.stop="store.addItem(item.productId, item.note)">+</button>
                                 <span v-else style="width: 1.6rem"></span>
                             </div>
                         </div>
@@ -604,11 +305,7 @@
                             </p>
                             <div class="order-item-right">
                                 <span class="gift-order-badge font-label">🎁 贈品</span>
-                                <span
-                                    class="font-label order-item-qty"
-                                    style="color: rgba(208, 197, 181, 0.55); font-size: 0.75rem"
-                                    >× 1</span
-                                >
+                                <span class="font-label order-item-qty" style="color: rgba(208, 197, 181, 0.55); font-size: 0.75rem">× 1</span>
                             </div>
                         </div>
                     </div>
@@ -616,34 +313,16 @@
 
                 <!-- 購物車底部 -->
                 <div class="cart-footer">
-                    <div
-                        style="
-                            padding: 0.75rem 1rem;
-                            border-bottom: 1px solid rgba(77, 70, 58, 0.2);
-                        "
-                    >
-                        <textarea
-                            v-model="store.specialRequest"
-                            class="note-textarea font-body resize-none"
-                            rows="2"
-                            placeholder="備註：過敏食材、特殊需求…"
-                        ></textarea>
+                    <div style="padding: 0.75rem 1rem; border-bottom: 1px solid rgba(77, 70, 58, 0.2)">
+                        <textarea v-model="store.specialRequest" class="note-textarea font-body resize-none" rows="2" placeholder="備註：過敏食材、特殊需求…"></textarea>
 
                         <!-- 優惠券：已登入顯示下拉，未登入顯示文字輸入 -->
                         <div style="margin-top: 0.5rem">
                             <!-- 已登入：下拉選已領優惠券 -->
                             <template v-if="isLoggedIn">
-                                <select
-                                    v-model="selectedCouponCode"
-                                    @change="onCouponSelect"
-                                    class="coupon-select font-body"
-                                >
+                                <select v-model="selectedCouponCode" @change="onCouponSelect" class="coupon-select font-body">
                                     <option value="">— 選擇優惠券 —</option>
-                                    <option
-                                        v-for="c in availableCoupons"
-                                        :key="c.id"
-                                        :value="c.code"
-                                    >
+                                    <option v-for="c in availableCoupons" :key="c.id" :value="c.code">
                                         {{ c.couponName }}｜{{ c.discountDescription }}
                                         <template v-if="c.endDate">
                                             （{{ new Date(c.endDate).toLocaleDateString('zh-TW') }}
@@ -651,155 +330,58 @@
                                         </template>
                                     </option>
                                     <!-- 最後一項：導到優惠券專區 -->
-                                    <option value="__coupons__" class="coupon-goto-option">
-                                        ✦ 查看更多優惠券 →
-                                    </option>
+                                    <option value="__coupons__" class="coupon-goto-option">✦ 查看更多優惠券 →</option>
                                 </select>
-                                <p
-                                    v-if="couponMsg"
-                                    class="font-label mb-0"
-                                    style="font-size: 0.7rem; margin-top: 0.25rem"
-                                    :style="{ color: couponOk ? '#a3d977' : '#ffb4ab' }"
-                                >
+                                <p v-if="couponMsg" class="font-label mb-0" style="font-size: 0.7rem; margin-top: 0.25rem" :style="{ color: couponOk ? '#a3d977' : '#ffb4ab' }">
                                     {{ couponMsg }}
                                 </p>
                             </template>
 
                             <!-- 未登入：提示登入才能使用優惠券 -->
                             <template v-else>
-                                <button @click="openAuthModal" class="font-label coupon-login-btn">
-                                    立即登入會員享優惠
-                                </button>
+                                <button @click="openAuthModal" class="font-label coupon-login-btn">立即登入會員享優惠</button>
                             </template>
                         </div>
                     </div>
 
                     <!-- 合計區 -->
-                    <div
-                        style="
-                            padding: 0.75rem 1rem;
-                            display: flex;
-                            flex-direction: column;
-                            gap: 0.5rem;
-                        "
-                    >
+                    <div style="padding: 0.75rem 1rem; display: flex; flex-direction: column; gap: 0.5rem">
                         <div style="display: flex; flex-direction: column; gap: 0.3rem">
                             <!-- 已套用活動標籤 -->
                             <div v-if="isLoggedIn && bestAutoEvent" class="applied-event-tag">
                                 <span class="applied-event-icon">🎉</span>
                                 <span class="font-label applied-event-text"
-                                    >已參加「{{ bestAutoEvent.title }}」活動 （滿 NT${{
-                                        bestAutoEvent.minSpend
-                                    }}
-                                    可享 {{ bestAutoEvent.discountDescription }}）</span
+                                    >已參加「{{ bestAutoEvent.title }}」活動 （滿 NT${{ bestAutoEvent.minSpend }} 可享 {{ bestAutoEvent.discountDescription }}）</span
                                 >
                             </div>
                             <!-- 活動折扣 -->
-                            <div
-                                v-if="isLoggedIn && autoEventDiscount > 0"
-                                style="
-                                    display: flex;
-                                    justify-content: space-between;
-                                    align-items: center;
-                                "
-                            >
-                                <span
-                                    class="font-label"
-                                    style="
-                                        font-size: 0.8rem;
-                                        color: rgba(163, 217, 119, 0.8);
-                                        letter-spacing: 0.06em;
-                                    "
-                                    >活動折扣</span
-                                >
-                                <span
-                                    class="font-label"
-                                    style="
-                                        font-size: 0.8rem;
-                                        color: #a3d977;
-                                        letter-spacing: 0.06em;
-                                    "
-                                    >－ NT$ {{ autoEventDiscount.toLocaleString() }}</span
-                                >
+                            <div v-if="isLoggedIn && autoEventDiscount > 0" style="display: flex; justify-content: space-between; align-items: center">
+                                <span class="font-label" style="font-size: 0.8rem; color: rgba(163, 217, 119, 0.8); letter-spacing: 0.06em">活動折扣</span>
+                                <span class="font-label" style="font-size: 0.8rem; color: #a3d977; letter-spacing: 0.06em">－ NT$ {{ autoEventDiscount.toLocaleString() }}</span>
                             </div>
                             <!-- 優惠券折扣 -->
-                            <div
-                                v-if="couponOk && couponDiscount > 0"
-                                style="
-                                    display: flex;
-                                    justify-content: space-between;
-                                    align-items: center;
-                                "
-                            >
-                                <span
-                                    class="font-label"
-                                    style="
-                                        font-size: 0.8rem;
-                                        color: rgba(163, 217, 119, 0.8);
-                                        letter-spacing: 0.06em;
-                                    "
-                                    >優惠券折扣</span
-                                >
-                                <span
-                                    class="font-label"
-                                    style="
-                                        font-size: 0.8rem;
-                                        color: #a3d977;
-                                        letter-spacing: 0.06em;
-                                    "
-                                    >－ NT$ {{ couponDiscount.toLocaleString() }}</span
-                                >
+                            <div v-if="couponOk && couponDiscount > 0" style="display: flex; justify-content: space-between; align-items: center">
+                                <span class="font-label" style="font-size: 0.8rem; color: rgba(163, 217, 119, 0.8); letter-spacing: 0.06em">優惠券折扣</span>
+                                <span class="font-label" style="font-size: 0.8rem; color: #a3d977; letter-spacing: 0.06em">－ NT$ {{ couponDiscount.toLocaleString() }}</span>
                             </div>
                             <!-- 合計 -->
-                            <div
-                                style="
-                                    display: flex;
-                                    justify-content: space-between;
-                                    align-items: center;
-                                "
-                            >
-                                <span
-                                    class="font-headline"
-                                    style="color: #e3c76b; font-size: 1.1rem"
-                                    >合計</span
-                                >
-                                <span
-                                    class="font-label"
-                                    style="
-                                        color: #e3c76b;
-                                        font-size: 1.1rem;
-                                        letter-spacing: 0.08em;
-                                    "
-                                    >NT$ {{ finalTotal.toLocaleString() }}</span
-                                >
+                            <div style="display: flex; justify-content: space-between; align-items: center">
+                                <span class="font-headline" style="color: #e3c76b; font-size: 1.1rem">合計</span>
+                                <span class="font-label" style="color: #e3c76b; font-size: 1.1rem; letter-spacing: 0.08em">NT$ {{ finalTotal.toLocaleString() }}</span>
                             </div>
                         </div>
                         <button
                             @click="goToStep2"
                             :disabled="store.totalItems === 0"
                             class="submit-btn font-label"
-                            style="
-                                display: block;
-                                width: 100%;
-                                padding: 0.875rem 0;
-                                font-size: 1rem;
-                                letter-spacing: 0.28em;
-                                text-transform: uppercase;
-                            "
+                            style="display: block; width: 100%; padding: 0.875rem 0; font-size: 1rem; letter-spacing: 0.28em; text-transform: uppercase"
                         >
                             下一步：填寫資料
                         </button>
                         <button
                             @click="clearAll"
                             class="clear-btn font-label"
-                            style="
-                                display: block;
-                                width: 100%;
-                                padding: 0.625rem 0;
-                                font-size: 0.85rem;
-                                letter-spacing: 0.1em;
-                                text-transform: uppercase;
-                            "
+                            style="display: block; width: 100%; padding: 0.625rem 0; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase"
                         >
                             清空訂單
                         </button>
@@ -812,21 +394,11 @@
         <div v-if="step === 1" class="mobile-bottom-bar" @click="cartOpen = true">
             <div style="display: flex; align-items: center; gap: 0.75rem">
                 <span class="bottom-badge">{{ store.totalItems }}</span>
-                <span
-                    class="font-label text-xs tracking-widest uppercase"
-                    style="color: rgba(208, 197, 181, 0.7)"
-                    >查看訂單</span
-                >
+                <span class="font-label text-xs tracking-widest uppercase" style="color: rgba(208, 197, 181, 0.7)">查看訂單</span>
             </div>
             <div style="display: flex; align-items: center; gap: 0.75rem">
-                <span class="font-label text-sm" style="color: #e3c76b"
-                    >NT$ {{ finalTotal.toLocaleString() }}</span
-                >
-                <span
-                    class="bottom-cta font-label text-xs"
-                    style="letter-spacing: 0.2em; text-transform: uppercase"
-                    >下一步</span
-                >
+                <span class="font-label text-sm" style="color: #e3c76b">NT$ {{ finalTotal.toLocaleString() }}</span>
+                <span class="bottom-cta font-label text-xs" style="letter-spacing: 0.2em; text-transform: uppercase">下一步</span>
             </div>
         </div>
         <div v-if="cartOpen" @click="cartOpen = false" class="mobile-overlay"></div>
@@ -839,53 +411,24 @@
                 <div class="form-group">
                     <label class="form-label font-label" :class="{ 'form-label-error': nameError }">
                         姓名 <span class="required-mark">*</span>
-                        <span v-if="isLoggedIn" class="autofill-hint font-label"
-                            >已帶入會員資料</span
-                        >
+                        <span v-if="isLoggedIn" class="autofill-hint font-label">已帶入會員資料</span>
                     </label>
-                    <input
-                        v-model="customerName"
-                        type="text"
-                        :class="['form-input font-body', { 'input-error': nameError }]"
-                        placeholder="請輸入取餐人姓名"
-                        @input="nameError = false"
-                    />
+                    <input v-model="customerName" type="text" :class="['form-input font-body', { 'input-error': nameError }]" placeholder="請輸入取餐人姓名" @input="nameError = false" />
                     <p v-if="nameError" class="form-error-msg font-label">請填寫姓名</p>
                 </div>
 
                 <div class="form-group">
-                    <label
-                        class="form-label font-label"
-                        :class="{ 'form-label-error': phoneError }"
-                    >
-                        電話 <span class="required-mark">*</span>
-                    </label>
-                    <input
-                        v-model="customerPhone"
-                        type="tel"
-                        :class="['form-input font-body', { 'input-error': phoneError }]"
-                        placeholder="09xx-xxxxxx"
-                        @input="phoneError = false"
-                    />
+                    <label class="form-label font-label" :class="{ 'form-label-error': phoneError }"> 電話 <span class="required-mark">*</span> </label>
+                    <input v-model="customerPhone" type="tel" :class="['form-input font-body', { 'input-error': phoneError }]" placeholder="09xx-xxxxxx" @input="phoneError = false" />
                     <p v-if="phoneError" class="form-error-msg font-label">請填寫有效電話號碼</p>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label font-label">取餐時段</label>
                     <div class="pickup-display font-label">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="13"
-                            height="13"
-                            fill="currentColor"
-                            viewBox="0 0 16 16"
-                        >
-                            <path
-                                d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"
-                            />
-                            <path
-                                d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"
-                            />
+                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
+                            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />
                         </svg>
                         今日 {{ pickupTime }}
                     </div>
@@ -893,12 +436,7 @@
 
                 <div class="form-group">
                     <label class="form-label font-label">備註（選填）</label>
-                    <textarea
-                        v-model="store.specialRequest"
-                        class="form-textarea font-body"
-                        rows="3"
-                        placeholder="過敏食材、特殊需求…"
-                    ></textarea>
+                    <textarea v-model="store.specialRequest" class="form-textarea font-body" rows="3" placeholder="過敏食材、特殊需求…"></textarea>
                 </div>
 
                 <div class="form-group utensils-group">
@@ -911,52 +449,26 @@
                 <!-- 小計摘要 -->
                 <div class="step2-summary">
                     <div style="display: flex; justify-content: space-between">
-                        <span
-                            class="font-label"
-                            style="color: rgba(208, 197, 181, 0.6); font-size: 0.8rem"
-                            >小計</span
-                        >
-                        <span class="font-label" style="font-size: 0.8rem"
-                            >NT$ {{ total.toLocaleString() }}</span
-                        >
+                        <span class="font-label" style="color: rgba(208, 197, 181, 0.6); font-size: 0.8rem">小計</span>
+                        <span class="font-label" style="font-size: 0.8rem">NT$ {{ total.toLocaleString() }}</span>
                     </div>
-                    <div
-                        v-if="isLoggedIn && autoEventDiscount > 0"
-                        style="display: flex; justify-content: space-between"
-                    >
-                        <span class="font-label" style="color: #a3d977; font-size: 0.8rem"
-                            >活動折扣</span
-                        >
-                        <span class="font-label" style="color: #a3d977; font-size: 0.8rem"
-                            >－ NT$ {{ autoEventDiscount.toLocaleString() }}</span
-                        >
+                    <div v-if="isLoggedIn && autoEventDiscount > 0" style="display: flex; justify-content: space-between">
+                        <span class="font-label" style="color: #a3d977; font-size: 0.8rem">活動折扣</span>
+                        <span class="font-label" style="color: #a3d977; font-size: 0.8rem">－ NT$ {{ autoEventDiscount.toLocaleString() }}</span>
                     </div>
-                    <div
-                        v-if="couponOk && couponDiscount > 0"
-                        style="display: flex; justify-content: space-between"
-                    >
-                        <span class="font-label" style="color: #a3d977; font-size: 0.8rem"
-                            >優惠券折扣</span
-                        >
-                        <span class="font-label" style="color: #a3d977; font-size: 0.8rem"
-                            >－ NT$ {{ couponDiscount.toLocaleString() }}</span
-                        >
+                    <div v-if="couponOk && couponDiscount > 0" style="display: flex; justify-content: space-between">
+                        <span class="font-label" style="color: #a3d977; font-size: 0.8rem">優惠券折扣</span>
+                        <span class="font-label" style="color: #a3d977; font-size: 0.8rem">－ NT$ {{ couponDiscount.toLocaleString() }}</span>
                     </div>
                     <div class="step2-total-row">
                         <span class="font-headline" style="color: #e3c76b">應付金額</span>
-                        <span
-                            class="font-label"
-                            style="color: #e3c76b; font-size: 1.15rem; letter-spacing: 0.08em"
-                            >NT$ {{ finalTotal.toLocaleString() }}</span
-                        >
+                        <span class="font-label" style="color: #e3c76b; font-size: 1.15rem; letter-spacing: 0.08em">NT$ {{ finalTotal.toLocaleString() }}</span>
                     </div>
                 </div>
 
                 <div class="step-nav">
                     <button @click="step = 1" class="step-back-btn font-label">← 返回選餐</button>
-                    <button @click="goToStep3" class="submit-btn font-label step-next-btn">
-                        確認資料 →
-                    </button>
+                    <button @click="goToStep3" class="submit-btn font-label step-next-btn">確認資料 →</button>
                 </div>
             </div>
         </div>
@@ -978,9 +490,7 @@
                     </div>
                     <div class="confirm-info-row">
                         <span class="font-label confirm-info-label">取餐時段</span>
-                        <span class="font-body confirm-info-val" style="color: #e3c76b"
-                            >今日 {{ pickupTime }}</span
-                        >
+                        <span class="font-body confirm-info-val" style="color: #e3c76b">今日 {{ pickupTime }}</span>
                     </div>
                     <div v-if="store.specialRequest" class="confirm-info-row">
                         <span class="font-label confirm-info-label">備註</span>
@@ -988,92 +498,37 @@
                     </div>
                     <div class="confirm-info-row">
                         <span class="font-label confirm-info-label">餐具</span>
-                        <span class="font-body confirm-info-val">{{
-                            needUtensils ? '需要' : '不需要'
-                        }}</span>
+                        <span class="font-body confirm-info-val">{{ needUtensils ? '需要' : '不需要' }}</span>
                     </div>
                 </div>
 
                 <div class="feather-divider" style="margin: 1.25rem 0"></div>
 
                 <!-- 品項明細 -->
-                <h3
-                    class="font-label"
-                    style="
-                        color: rgba(208, 197, 181, 0.5);
-                        font-size: 0.9rem;
-                        letter-spacing: 0.18em;
-                        text-transform: uppercase;
-                        margin-bottom: 0.75rem;
-                    "
-                >
-                    品項明細
-                </h3>
+                <h3 class="font-label" style="color: rgba(208, 197, 181, 0.5); font-size: 0.9rem; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 0.75rem">品項明細</h3>
                 <div class="confirm-items">
                     <template v-for="item in cartItemsWithDetails" :key="item.lineId">
                         <div class="confirm-item">
                             <div class="confirm-item-left">
-                                <div
-                                    v-if="item.isSetMeal"
-                                    class="setmeal-badge font-label"
-                                    style="margin-bottom: 0.15rem"
-                                >
-                                    🍱 套餐
+                                <div v-if="item.isSetMeal" class="setmeal-badge font-label" style="margin-bottom: 0.15rem">🍱 套餐</div>
+                                <span class="font-body confirm-item-name">{{ item.productName }}</span>
+                                <div v-if="item.isSetMeal" class="setmeal-subitems" style="margin-top: 0.2rem">
+                                    <span v-for="f in item.setMealData?.fixedItems" :key="'cf-' + f.dishId" class="font-label setmeal-subitem">{{ f.dishName }} × {{ f.quantity }}</span>
+                                    <span v-for="s in item.setMealData?.selectedOptions" :key="'cs-' + s.dishId" class="font-label setmeal-subitem">{{ s.dishName }} × {{ s.qty }}</span>
                                 </div>
-                                <span class="font-body confirm-item-name">{{
-                                    item.productName
-                                }}</span>
-                                <div
-                                    v-if="item.isSetMeal"
-                                    class="setmeal-subitems"
-                                    style="margin-top: 0.2rem"
-                                >
-                                    <span
-                                        v-for="f in item.setMealData?.fixedItems"
-                                        :key="'cf-' + f.dishId"
-                                        class="font-label setmeal-subitem"
-                                        >{{ f.dishName }} × {{ f.quantity }}</span
-                                    >
-                                    <span
-                                        v-for="s in item.setMealData?.selectedOptions"
-                                        :key="'cs-' + s.dishId"
-                                        class="font-label setmeal-subitem"
-                                        >{{ s.dishName }} × {{ s.qty }}</span
-                                    >
-                                </div>
-                                <p
-                                    v-if="item.note"
-                                    class="font-label"
-                                    style="
-                                        color: rgba(208, 197, 181, 0.45);
-                                        font-size: 0.8rem;
-                                        margin: 0.1rem 0 0;
-                                    "
-                                >
+                                <p v-if="item.note" class="font-label" style="color: rgba(208, 197, 181, 0.45); font-size: 0.8rem; margin: 0.1rem 0 0">
                                     {{ item.note }}
                                 </p>
                             </div>
                             <div class="confirm-item-right">
-                                <span
-                                    class="font-label"
-                                    style="color: rgba(208, 197, 181, 0.5); font-size: 0.85rem"
-                                    >× {{ item.qty }}</span
-                                >
-                                <span class="font-label" style="color: #d5b478; font-size: 0.9rem"
-                                    >NT$ {{ (item.unitPrice * item.qty).toLocaleString() }}</span
-                                >
+                                <span class="font-label" style="color: rgba(208, 197, 181, 0.5); font-size: 0.85rem">× {{ item.qty }}</span>
+                                <span class="font-label" style="color: #d5b478; font-size: 0.9rem">NT$ {{ (item.unitPrice * item.qty).toLocaleString() }}</span>
                             </div>
                         </div>
                     </template>
                     <!-- 贈品 -->
-                    <div
-                        v-if="isLoggedIn && giftCartItem"
-                        class="confirm-item"
-                        style="background: rgba(163, 217, 119, 0.04)"
-                    >
-                        <span class="font-body confirm-item-name">{{
-                            giftCartItem.productName
-                        }}</span>
+                    <div v-if="isLoggedIn && giftCartItem" class="confirm-item" style="background: rgba(163, 217, 119, 0.04)">
+                        <span class="font-body confirm-item-name">{{ giftCartItem.productName }}</span>
                         <div class="confirm-item-right">
                             <span class="gift-order-badge font-label">🎁 贈品</span>
                         </div>
@@ -1085,33 +540,21 @@
                 <!-- 金額明細 -->
                 <div class="confirm-totals">
                     <!-- 活動（非贈品型才顯示折抵行） -->
-                    <div
-                        v-if="isLoggedIn && bestAutoEvent && bestAutoEvent.discountType !== 'Gift'"
-                        class="confirm-total-row-3"
-                    >
+                    <div v-if="isLoggedIn && bestAutoEvent && bestAutoEvent.discountType !== 'Gift'" class="confirm-total-row-3">
                         <span class="font-label confirm-dim">活動</span>
                         <span class="font-label confirm-mid">{{ bestAutoEvent.title }}</span>
-                        <span class="font-label confirm-green"
-                            >折抵 NT$ {{ autoEventDiscount.toLocaleString() }}</span
-                        >
+                        <span class="font-label confirm-green">折抵 NT$ {{ autoEventDiscount.toLocaleString() }}</span>
                     </div>
                     <!-- 贈品型活動：只顯示參加提示 -->
-                    <div
-                        v-if="isLoggedIn && bestAutoEvent && bestAutoEvent.discountType === 'Gift'"
-                        class="confirm-total-row"
-                    >
-                        <span class="font-label confirm-dim" style="font-size: 0.8rem"
-                            >已參加「{{ bestAutoEvent.title }}」</span
-                        >
+                    <div v-if="isLoggedIn && bestAutoEvent && bestAutoEvent.discountType === 'Gift'" class="confirm-total-row">
+                        <span class="font-label confirm-dim" style="font-size: 0.8rem">已參加「{{ bestAutoEvent.title }}」</span>
                         <span></span>
                     </div>
                     <!-- 優惠券 -->
                     <div v-if="couponOk && couponDiscount > 0" class="confirm-total-row-3">
                         <span class="font-label confirm-dim">優惠券</span>
                         <span class="font-label confirm-mid">{{ couponCode }}</span>
-                        <span class="font-label confirm-green"
-                            >折抵 NT$ {{ couponDiscount.toLocaleString() }}</span
-                        >
+                        <span class="font-label confirm-green">折抵 NT$ {{ couponDiscount.toLocaleString() }}</span>
                     </div>
                     <!-- 合計（原價） -->
                     <div class="confirm-total-row">
@@ -1119,40 +562,20 @@
                         <span class="font-label">NT$ {{ total.toLocaleString() }}</span>
                     </div>
                     <!-- 折扣（有折扣才顯示） -->
-                    <div
-                        v-if="autoEventDiscount + (couponOk ? couponDiscount : 0) > 0"
-                        class="confirm-total-row"
-                    >
+                    <div v-if="autoEventDiscount + (couponOk ? couponDiscount : 0) > 0" class="confirm-total-row">
                         <span class="font-label confirm-dim">折扣</span>
-                        <span class="font-label confirm-green"
-                            >－ NT$
-                            {{
-                                (
-                                    autoEventDiscount + (couponOk ? couponDiscount : 0)
-                                ).toLocaleString()
-                            }}</span
-                        >
+                        <span class="font-label confirm-green">－ NT$ {{ (autoEventDiscount + (couponOk ? couponDiscount : 0)).toLocaleString() }}</span>
                     </div>
                     <!-- 應付金額 -->
                     <div class="confirm-total-row confirm-grand">
-                        <span class="font-headline" style="color: #e3c76b; font-size: 1.15rem"
-                            >應付金額</span
-                        >
-                        <span
-                            class="font-label"
-                            style="color: #e3c76b; font-size: 1.2rem; letter-spacing: 0.08em"
-                            >NT$ {{ finalTotal.toLocaleString() }}</span
-                        >
+                        <span class="font-headline" style="color: #e3c76b; font-size: 1.15rem">應付金額</span>
+                        <span class="font-label" style="color: #e3c76b; font-size: 1.2rem; letter-spacing: 0.08em">NT$ {{ finalTotal.toLocaleString() }}</span>
                     </div>
                 </div>
 
                 <div class="step-nav" style="margin-top: 1.5rem">
                     <button @click="step = 2" class="step-back-btn font-label">← 返回修改</button>
-                    <button
-                        @click="submitOrder"
-                        :disabled="submitting"
-                        class="submit-btn font-label step-next-btn"
-                    >
+                    <button @click="submitOrder" :disabled="submitting" class="submit-btn font-label step-next-btn">
                         {{ submitting ? '送出中…' : '確認送出' }}
                     </button>
                 </div>
@@ -1165,13 +588,7 @@
             <div class="sp-header-row">
                 <div class="sp-check-ring">
                     <!-- 訂單 / 收據圖示 -->
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="30"
-                        height="30"
-                        fill="currentColor"
-                        viewBox="0 0 16 16"
-                    >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="0 0 16 16">
                         <path
                             d="M1.92.506a.5.5 0 0 1 .434.14L3 1.293l.646-.647a.5.5 0 0 1 .708 0L5 1.293l.646-.647a.5.5 0 0 1 .708 0L7 1.293l.646-.647a.5.5 0 0 1 .708 0L9 1.293l.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .801.13l.5 1A.5.5 0 0 1 15 2v12a.5.5 0 0 1-.053.224l-.5 1a.5.5 0 0 1-.8.13L13 14.707l-.646.647a.5.5 0 0 1-.708 0L11 14.707l-.646.647a.5.5 0 0 1-.708 0L9 14.707l-.646.647a.5.5 0 0 1-.708 0L7 14.707l-.646.647a.5.5 0 0 1-.708 0L5 14.707l-.646.647a.5.5 0 0 1-.708 0L3 14.707l-.646.647a.5.5 0 0 1-.801-.13l-.5-1A.5.5 0 0 1 1 14V2a.5.5 0 0 1 .053-.224l.5-1a.5.5 0 0 1 .367-.27zm.217 1.338L2 2.118v11.764l.137.274.51-.51a.5.5 0 0 1 .707 0l.646.647.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.509.509.137-.274V2.118l-.137-.274-.51.51a.5.5 0 0 1-.707 0L12 1.707l-.646.647a.5.5 0 0 1-.708 0L10 1.707l-.646.647a.5.5 0 0 1-.708 0L8 1.707l-.646.647a.5.5 0 0 1-.708 0L6 1.707l-.646.647a.5.5 0 0 1-.708 0L4 1.707l-.646.647a.5.5 0 0 1-.708 0l-.509-.51z"
                         />
@@ -1191,17 +608,8 @@
             <div class="sp-progress-bar">
                 <div :class="['sp-prog-step', orderProgress >= 1 ? 'sp-prog-done' : '']">
                     <div class="sp-prog-dot">
-                        <svg
-                            v-if="orderProgress >= 1"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            fill="currentColor"
-                            viewBox="0 0 16 16"
-                        >
-                            <path
-                                d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"
-                            />
+                        <svg v-if="orderProgress >= 1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
                         </svg>
                         <span v-else>1</span>
                     </div>
@@ -1210,17 +618,8 @@
                 <div :class="['sp-prog-line', orderProgress >= 2 ? 'sp-prog-line-lit' : '']"></div>
                 <div :class="['sp-prog-step', orderProgress >= 2 ? 'sp-prog-active' : '']">
                     <div class="sp-prog-dot">
-                        <svg
-                            v-if="orderProgress >= 3"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            fill="currentColor"
-                            viewBox="0 0 16 16"
-                        >
-                            <path
-                                d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"
-                            />
+                        <svg v-if="orderProgress >= 3" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
                         </svg>
                         <span v-else>2</span>
                     </div>
@@ -1243,33 +642,11 @@
                             <template v-for="item in confirmedItems" :key="item.lineId">
                                 <div class="sp-item">
                                     <div class="sp-item-left">
-                                        <div
-                                            v-if="item.isSetMeal"
-                                            class="setmeal-badge font-label"
-                                            style="margin-bottom: 0.15rem"
-                                        >
-                                            🍱 套餐
-                                        </div>
-                                        <span class="font-body sp-item-name">{{
-                                            item.productName
-                                        }}</span>
-                                        <div
-                                            v-if="item.isSetMeal"
-                                            class="setmeal-subitems"
-                                            style="margin-top: 0.2rem"
-                                        >
-                                            <span
-                                                v-for="f in item.setMealData?.fixedItems"
-                                                :key="'sf-' + f.dishId"
-                                                class="font-label setmeal-subitem"
-                                                >{{ f.dishName }} × {{ f.quantity }}</span
-                                            >
-                                            <span
-                                                v-for="s in item.setMealData?.selectedOptions"
-                                                :key="'ss-' + s.dishId"
-                                                class="font-label setmeal-subitem"
-                                                >{{ s.dishName }} × {{ s.qty }}</span
-                                            >
+                                        <div v-if="item.isSetMeal" class="setmeal-badge font-label" style="margin-bottom: 0.15rem">🍱 套餐</div>
+                                        <span class="font-body sp-item-name">{{ item.productName }}</span>
+                                        <div v-if="item.isSetMeal" class="setmeal-subitems" style="margin-top: 0.2rem">
+                                            <span v-for="f in item.setMealData?.fixedItems" :key="'sf-' + f.dishId" class="font-label setmeal-subitem">{{ f.dishName }} × {{ f.quantity }}</span>
+                                            <span v-for="s in item.setMealData?.selectedOptions" :key="'ss-' + s.dishId" class="font-label setmeal-subitem">{{ s.dishName }} × {{ s.qty }}</span>
                                         </div>
                                         <p v-if="item.note" class="font-label sp-item-note">
                                             {{ item.note }}
@@ -1277,33 +654,17 @@
                                     </div>
                                     <div class="sp-item-right">
                                         <span class="font-label sp-item-qty">× {{ item.qty }}</span>
-                                        <span class="font-label sp-item-price"
-                                            >NT$
-                                            {{ (item.unitPrice * item.qty).toLocaleString() }}</span
-                                        >
+                                        <span class="font-label sp-item-price">NT$ {{ (item.unitPrice * item.qty).toLocaleString() }}</span>
                                     </div>
                                 </div>
                             </template>
                             <!-- 贈品 -->
-                            <div
-                                v-if="confirmedGift"
-                                class="sp-item"
-                                style="background: rgba(163, 217, 119, 0.04)"
-                            >
-                                <span class="font-body sp-item-name">{{
-                                    confirmedGift.productName
-                                }}</span>
+                            <div v-if="confirmedGift" class="sp-item" style="background: rgba(163, 217, 119, 0.04)">
+                                <span class="font-body sp-item-name">{{ confirmedGift.productName }}</span>
                                 <span class="gift-order-badge font-label">🎁 贈品</span>
                             </div>
                             <!-- 贈品活動來源（贈品型活動才顯示） -->
-                            <div
-                                v-if="
-                                    confirmedGift &&
-                                    confirmedEventTitle &&
-                                    confirmedEventDiscountType === 'Gift'
-                                "
-                                class="sp-gift-event-note font-label"
-                            >
+                            <div v-if="confirmedGift && confirmedEventTitle && confirmedEventDiscountType === 'Gift'" class="sp-gift-event-note font-label">
                                 {{ confirmedEventTitle }}：{{ confirmedEventDesc }}
                             </div>
                         </div>
@@ -1312,62 +673,34 @@
 
                         <div class="sp-meta-rows">
                             <!-- 活動（非贈品型才顯示折抵行） -->
-                            <div
-                                v-if="confirmedEventTitle && confirmedEventDiscountType !== 'Gift'"
-                                class="sp-meta-row-3"
-                            >
+                            <div v-if="confirmedEventTitle && confirmedEventDiscountType !== 'Gift'" class="sp-meta-row-3">
                                 <span class="font-label sp-meta-label">活動</span>
-                                <span class="font-label sp-meta-val-mid">{{
-                                    confirmedEventTitle
-                                }}</span>
-                                <span class="font-label sp-meta-discount"
-                                    >折抵 NT$
-                                    {{ confirmedAutoEventDiscount.toLocaleString() }}</span
-                                >
+                                <span class="font-label sp-meta-val-mid">{{ confirmedEventTitle }}</span>
+                                <span class="font-label sp-meta-discount">折抵 NT$ {{ confirmedAutoEventDiscount.toLocaleString() }}</span>
                             </div>
                             <!-- 優惠券 -->
                             <div v-if="confirmedCouponCode" class="sp-meta-row-3">
                                 <span class="font-label sp-meta-label">優惠券</span>
-                                <span class="font-label sp-meta-val-mid">{{
-                                    confirmedCouponCode
-                                }}</span>
-                                <span class="font-label sp-meta-discount"
-                                    >折抵 NT$ {{ confirmedCouponDiscount.toLocaleString() }}</span
-                                >
+                                <span class="font-label sp-meta-val-mid">{{ confirmedCouponCode }}</span>
+                                <span class="font-label sp-meta-discount">折抵 NT$ {{ confirmedCouponDiscount.toLocaleString() }}</span>
                             </div>
                             <!-- 合計（原價） -->
                             <div class="sp-meta-row">
                                 <span class="font-label sp-meta-label">合計</span>
-                                <span class="font-label sp-meta-val"
-                                    >NT$ {{ confirmedSubtotal.toLocaleString() }}</span
-                                >
+                                <span class="font-label sp-meta-val">NT$ {{ confirmedSubtotal.toLocaleString() }}</span>
                             </div>
                             <!-- 折扣（有折扣才顯示） -->
-                            <div
-                                v-if="confirmedAutoEventDiscount + confirmedCouponDiscount > 0"
-                                class="sp-meta-row"
-                            >
+                            <div v-if="confirmedAutoEventDiscount + confirmedCouponDiscount > 0" class="sp-meta-row">
                                 <span class="font-label sp-meta-label">折扣</span>
-                                <span class="font-label sp-meta-val" style="color: #7ec87e"
-                                    >－ NT$
-                                    {{
-                                        (
-                                            confirmedAutoEventDiscount + confirmedCouponDiscount
-                                        ).toLocaleString()
-                                    }}</span
-                                >
+                                <span class="font-label sp-meta-val" style="color: #7ec87e">－ NT$ {{ (confirmedAutoEventDiscount + confirmedCouponDiscount).toLocaleString() }}</span>
                             </div>
                         </div>
 
                         <!-- 金額總計（突出顯示） -->
                         <div class="feather-divider" style="margin: 0.75rem 0 0.65rem"></div>
                         <div class="sp-meta-row">
-                            <span class="font-label sp-meta-label" style="font-size: 1rem"
-                                >金額總計</span
-                            >
-                            <span class="font-label sp-meta-gold"
-                                >NT$ {{ confirmedTotal.toLocaleString() }}</span
-                            >
+                            <span class="font-label sp-meta-label" style="font-size: 1rem">金額總計</span>
+                            <span class="font-label sp-meta-gold">NT$ {{ confirmedTotal.toLocaleString() }}</span>
                         </div>
 
                         <!-- 備註（金額總計下方） -->
@@ -1385,9 +718,7 @@
                         <!-- 查詢訂單進度提示（卡片最上方） -->
                         <p class="font-label sp-lookup-hint-text">
                             想確認取餐進度可至
-                            <RouterLink to="/order-lookup" class="sp-lookup-link"
-                                >訂單查詢頁</RouterLink
-                            >
+                            <RouterLink to="/order-lookup" class="sp-lookup-link">訂單查詢頁</RouterLink>
                             隨時查詢
                         </p>
                         <div class="sp-reminder-item">
@@ -1409,9 +740,7 @@
                         <!-- 上排：標籤 + 時間 -->
                         <div class="sp-pickup-top">
                             <span class="font-label sp-pickup-label">預計取餐時間</span>
-                            <span class="font-headline sp-pickup-time"
-                                >今日 {{ confirmedPickupTime }}</span
-                            >
+                            <span class="font-headline sp-pickup-time">今日 {{ confirmedPickupTime }}</span>
                         </div>
                         <!-- 下排：取餐人資訊 + 付款 / 取餐方式 -->
                         <div class="sp-pickup-meta">
@@ -1433,21 +762,17 @@
                             </div>
                             <div class="sp-meta-row">
                                 <span class="font-label sp-meta-label">餐具</span>
-                                <span class="font-label sp-meta-val">{{
-                                    confirmedNeedUtensils ? '需要' : '不需要'
-                                }}</span>
+                                <span class="font-label sp-meta-val">{{ confirmedNeedUtensils ? '需要' : '不需要' }}</span>
                             </div>
                         </div>
                     </div>
 
                     <!-- 修改取餐資料 -->
-                    <button
-                        v-if="orderProgress < 3"
-                        class="sp-edit-pickup-btn font-label"
-                        @click="showEditModal = true"
-                    >
+                    <button v-if="orderProgress < 3" class="sp-edit-pickup-btn font-label" @click="showEditModal = true">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
-                            <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                            <path
+                                d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"
+                            />
                         </svg>
                         修改取餐資料
                     </button>
@@ -1464,39 +789,21 @@
                 <div class="ready-modal">
                     <div class="ready-modal-icon">🍽</div>
                     <h2 class="font-headline ready-modal-title">餐點已完成！</h2>
-                    <p class="font-body ready-modal-body">
-                        您的餐點已備妥，請至櫃台取餐並完成付款。
-                    </p>
-                    <button class="ready-modal-btn font-label" @click="onReadyModalConfirm">
-                        確認
-                    </button>
+                    <p class="font-body ready-modal-body">您的餐點已備妥，請至櫃台取餐並完成付款。</p>
+                    <button class="ready-modal-btn font-label" @click="onReadyModalConfirm">確認</button>
                 </div>
             </div>
         </Teleport>
 
         <!-- ══ 修改取餐資料 Modal ══ -->
-        <EditPickupModal
-            :visible="showEditModal"
-            :order="editPickupOrder"
-            :isSaving="editSaving"
-            @close="showEditModal = false"
-            @saved="handlePickupSaved"
-        />
+        <EditPickupModal :visible="showEditModal" :order="editPickupOrder" :isSaving="editSaving" @close="showEditModal = false" @saved="handlePickupSaved" />
 
         <!-- ══ Detail Modal ══ -->
         <DishDetailModal
             :dish="activeDetail"
             :edit-mode="editingLineId !== null"
-            :initial-qty="
-                editingLineId !== null
-                    ? (cartItemsWithDetails.find((i) => i.lineId === editingLineId)?.qty ?? 1)
-                    : (activeDetail?.defaultQty ?? 1)
-            "
-            :initial-note="
-                editingLineId !== null
-                    ? (cartItemsWithDetails.find((i) => i.lineId === editingLineId)?.note ?? '')
-                    : ''
-            "
+            :initial-qty="editingLineId !== null ? (cartItemsWithDetails.find((i) => i.lineId === editingLineId)?.qty ?? 1) : (activeDetail?.defaultQty ?? 1)"
+            :initial-note="editingLineId !== null ? (cartItemsWithDetails.find((i) => i.lineId === editingLineId)?.note ?? '') : ''"
             @close="((activeDetail = null), (editingLineId = null))"
             @confirm="onDetailConfirm"
         />
@@ -1505,19 +812,9 @@
         <SetMealSelectModal
             :meal="activeMeal"
             :edit-mode="editingMealLineId !== null"
-            :initial-qty="
-                editingMealLineId !== null
-                    ? (store.lines.find((l) => l.lineId === editingMealLineId)?.qty ?? 1)
-                    : 1
-            "
-            :initial-note="
-                editingMealLineId !== null
-                    ? (store.lines.find((l) => l.lineId === editingMealLineId)?.note ?? '')
-                    : ''
-            "
-            :initial-sel="
-                editingMealLineId !== null ? buildInitialSel(editingMealLineId) : demoMealInitialSel
-            "
+            :initial-qty="editingMealLineId !== null ? (store.lines.find((l) => l.lineId === editingMealLineId)?.qty ?? 1) : 1"
+            :initial-note="editingMealLineId !== null ? (store.lines.find((l) => l.lineId === editingMealLineId)?.note ?? '') : ''"
+            :initial-sel="editingMealLineId !== null ? buildInitialSel(editingMealLineId) : demoMealInitialSel"
             @close="((activeMeal = null), (editingMealLineId = null), (demoMealInitialSel = {}))"
             @confirm="onSetMealConfirm"
         />
@@ -1535,28 +832,15 @@
                             使用此優惠券後，需要再消費
                             <strong class="cew-highlight">
                                 NT$
-                                {{
-                                    (bestAutoEvent
-                                        ? bestAutoEvent.minSpend -
-                                          (total - (pendingCouponData?.discount ?? 0))
-                                        : 0
-                                    ).toLocaleString()
-                                }}
+                                {{ (bestAutoEvent ? bestAutoEvent.minSpend - (total - (pendingCouponData?.discount ?? 0)) : 0).toLocaleString() }}
                             </strong>
                             才可享「<strong class="cew-highlight">{{ bestAutoEvent?.title }}</strong
                             >」 活動優惠（{{ bestAutoEvent?.discountDescription }}）。
                         </p>
                         <p class="font-label cew-sub">確定要使用優惠券嗎？</p>
                         <div class="cew-btns">
-                            <button class="cew-btn-cancel font-label" @click="cancelCouponWarn">
-                                取消
-                            </button>
-                            <button
-                                class="cew-btn-confirm font-label"
-                                @click="confirmCouponDespiteEvent"
-                            >
-                                確定使用
-                            </button>
+                            <button class="cew-btn-cancel font-label" @click="cancelCouponWarn">取消</button>
+                            <button class="cew-btn-confirm font-label" @click="confirmCouponDespiteEvent">確定使用</button>
                         </div>
                     </div>
                 </div>
@@ -1565,24 +849,10 @@
 
         <!-- 簡易 Toast -->
         <Teleport to="body">
-            <div
-                class="simple-toast"
-                :style="
-                    toastVisible
-                        ? 'opacity:1;transform:translateX(-50%) translateY(0)'
-                        : 'opacity:0;pointer-events:none;transform:translateX(-50%) translateY(10px)'
-                "
-            >
-                <div
-                    class="px-5 py-3 shadow-xl flex items-center gap-3"
-                    style="background: #362620; border: 1px solid rgba(77, 70, 58, 0.4)"
-                >
+            <div class="simple-toast" :style="toastVisible ? 'opacity:1;transform:translateX(-50%) translateY(0)' : 'opacity:0;pointer-events:none;transform:translateX(-50%) translateY(10px)'">
+                <div class="px-5 py-3 shadow-xl flex items-center gap-3" style="background: #362620; border: 1px solid rgba(77, 70, 58, 0.4)">
                     <span style="color: #e3c76b">+</span>
-                    <span
-                        class="font-label text-xs tracking-widest uppercase"
-                        style="color: #f9ddd3"
-                        >{{ toastMsg }}</span
-                    >
+                    <span class="font-label text-xs tracking-widest uppercase" style="color: #f9ddd3">{{ toastMsg }}</span>
                 </div>
             </div>
         </Teleport>
@@ -1607,58 +877,23 @@
                                       : 'eligible',
                         ]"
                     >
-                        <button class="notify-toast-close" @click="dismissToast(toast.key)">
-                            ✕
-                        </button>
+                        <button class="notify-toast-close" @click="dismissToast(toast.key)">✕</button>
                         <div class="notify-toast-icon">
-                            {{
-                                toast.type === 'near'
-                                    ? '🔥'
-                                    : toast.type === 'one-event-note'
-                                      ? 'ℹ️'
-                                      : toast.type === 'applied-event'
-                                        ? '🎉'
-                                        : '🎁'
-                            }}
+                            {{ toast.type === 'near' ? '🔥' : toast.type === 'one-event-note' ? 'ℹ️' : toast.type === 'applied-event' ? '🎉' : '🎁' }}
                         </div>
                         <p class="font-body notify-toast-msg">
                             <template v-if="toast.type === 'near'"
-                                >差 NT${{
-                                    toast.ev.minSpend - (total - couponDiscount)
-                                }}
-                                即可參加「{{ toast.ev.title }}」活動，享
-                                {{ toast.ev.discountDescription }} 優惠！</template
+                                >差 NT${{ toast.ev.minSpend - (total - couponDiscount) }} 即可參加「{{ toast.ev.title }}」活動，享 {{ toast.ev.discountDescription }} 優惠！</template
                             >
                             <template v-else-if="toast.type === 'eligible-notify'">
                                 <template v-if="!isLoggedIn">
-                                    恭喜！金額已達活動門檻，<span
-                                        @click="openAuthModal"
-                                        style="
-                                            color: #e3c76b;
-                                            font-weight: 700;
-                                            text-decoration: underline;
-                                            cursor: pointer;
-                                        "
-                                        >登入會員</span
-                                    >即可參加「{{ toast.ev.title }}」活動{{
-                                        toast.ev.summary ? `(${toast.ev.summary})` : ''
-                                    }}！
+                                    恭喜！金額已達活動門檻，<span @click="openAuthModal" style="color: #e3c76b; font-weight: 700; text-decoration: underline; cursor: pointer">登入會員</span
+                                    >即可參加「{{ toast.ev.title }}」活動{{ toast.ev.summary ? `(${toast.ev.summary})` : '' }}！
                                 </template>
-                                <template v-else>
-                                    恭喜！金額已達門檻，可參加「{{ toast.ev.title }}」活動{{
-                                        toast.ev.summary ? `(${toast.ev.summary})` : ''
-                                    }}！（請洽現場服務人員）
-                                </template>
+                                <template v-else> 恭喜！金額已達門檻，可參加「{{ toast.ev.title }}」活動{{ toast.ev.summary ? `(${toast.ev.summary})` : '' }}！（請洽現場服務人員） </template>
                             </template>
-                            <template v-else-if="toast.type === 'one-event-note'"
-                                >每次用餐能參加一個活動，不得與其他優惠活動合併使用(系統將自動套入門檻最高的活動)</template
-                            >
-                            <template v-else-if="toast.type === 'applied-event'"
-                                >已參加「{{ toast.ev.title }}」活動 （滿 NT${{
-                                    toast.ev.minSpend
-                                }}
-                                可享 {{ toast.ev.discountDescription }}）</template
-                            >
+                            <template v-else-if="toast.type === 'one-event-note'">每次用餐能參加一個活動，不得與其他優惠活動合併使用(系統將自動套入門檻最高的活動)</template>
+                            <template v-else-if="toast.type === 'applied-event'">已參加「{{ toast.ev.title }}」活動 （滿 NT${{ toast.ev.minSpend }} 可享 {{ toast.ev.discountDescription }}）</template>
                         </p>
                     </div>
                 </TransitionGroup>
@@ -1826,31 +1061,31 @@ const orderNumber = ref('')
 const submitting = ref(false)
 
 // ── 修改取餐資料 Modal ────────────────────────────────
-const showEditModal  = ref(false)
-const editSaving     = ref(false)
+const showEditModal = ref(false)
+const editSaving = ref(false)
 const editPickupOrder = computed(() => ({
-    orderNumber:   orderNumber.value,
-    pickupTime:    confirmedPickupTime.value,
-    customerName:  confirmedName.value,
+    orderNumber: orderNumber.value,
+    pickupTime: confirmedPickupTime.value,
+    customerName: confirmedName.value,
     customerPhone: confirmedPhone.value,
-    note:          '',  // 成功頁不需解析備註
+    note: '', // 成功頁不需解析備註
 }))
 
 async function handlePickupSaved(data) {
     editSaving.value = true
     try {
         const res = await apiFetch('/Orders/UpdatePickupInfo', {
-            method:  'PUT',
+            method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body:    JSON.stringify(data),
+            body: JSON.stringify(data),
         })
         if (!res.ok) throw new Error()
         // 同步更新畫面顯示
-        confirmedPickupTime.value    = data.pickupTime
-        confirmedName.value          = data.customerName
-        confirmedPhone.value         = data.customerPhone
-        confirmedNeedUtensils.value  = data.utensils
-        saveSuccessToStorage()          // 同步寫回 localStorage
+        confirmedPickupTime.value = data.pickupTime
+        confirmedName.value = data.customerName
+        confirmedPhone.value = data.customerPhone
+        confirmedNeedUtensils.value = data.utensils
+        saveSuccessToStorage() // 同步寫回 localStorage
         showEditModal.value = false
     } catch {
         alert('儲存失敗，請稍後再試')
@@ -2051,26 +1286,16 @@ const cartItemsWithDetails = computed(() =>
         .filter(Boolean)
 )
 
-const total = computed(() =>
-    cartItemsWithDetails.value.reduce((s, i) => s + i.unitPrice * i.qty, 0)
-)
+const total = computed(() => cartItemsWithDetails.value.reduce((s, i) => s + i.unitPrice * i.qty, 0))
 
 const bestAutoEvent = computed(() => {
     if (!autoEvents.value.length) return null
-    return [...autoEvents.value].sort((a, b) =>
-        b.minSpend !== a.minSpend
-            ? b.minSpend - a.minSpend
-            : (b.calculatedDiscount ?? 0) - (a.calculatedDiscount ?? 0)
-    )[0]
+    return [...autoEvents.value].sort((a, b) => (b.minSpend !== a.minSpend ? b.minSpend - a.minSpend : (b.calculatedDiscount ?? 0) - (a.calculatedDiscount ?? 0)))[0]
 })
 
-const autoEventDiscount = computed(() =>
-    isLoggedIn.value && bestAutoEvent.value ? (bestAutoEvent.value.calculatedDiscount ?? 0) : 0
-)
+const autoEventDiscount = computed(() => (isLoggedIn.value && bestAutoEvent.value ? (bestAutoEvent.value.calculatedDiscount ?? 0) : 0))
 
-const finalTotal = computed(() =>
-    Math.max(0, total.value - couponDiscount.value - autoEventDiscount.value)
-)
+const finalTotal = computed(() => Math.max(0, total.value - couponDiscount.value - autoEventDiscount.value))
 
 // ── 展示用分類（從真實 products 過濾，保留真實 productId / setMealId / 價格）──
 const DEMO_CATEGORY_KEY = '展示'
@@ -2108,17 +1333,13 @@ const sidebarCategories = computed(() => {
     ].filter((s) => s.count > 0)
 
     if (isLoggedIn.value) {
-        specials.push(
-            { key: '我的收藏', label: '我的收藏', count: favoriteProducts.value.length },
-            { key: '歷史訂單', label: '歷史訂單', count: orderHistory.value.length }
-        )
+        specials.push({ key: '我的收藏', label: '我的收藏', count: favoriteProducts.value.length }, { key: '歷史訂單', label: '歷史訂單', count: orderHistory.value.length })
     }
 
     const map = new Map()
     products.value.forEach((p) => {
         if (!p.categoryName) return
-        if (!map.has(p.categoryName))
-            map.set(p.categoryName, { key: p.categoryName, label: p.categoryName, count: 0 })
+        if (!map.has(p.categoryName)) map.set(p.categoryName, { key: p.categoryName, label: p.categoryName, count: 0 })
         map.get(p.categoryName).count++
     })
     const cats = Array.from(map.values()).sort((a, b) => {
@@ -2153,9 +1374,7 @@ const filteredProducts = computed(() => {
 
 const displaySections = computed(() => {
     if (activeSidebarCat.value === '我的收藏') {
-        return favoriteProducts.value.length
-            ? [{ key: '我的收藏', label: '我的收藏', dishes: favoriteProducts.value }]
-            : []
+        return favoriteProducts.value.length ? [{ key: '我的收藏', label: '我的收藏', dishes: favoriteProducts.value }] : []
     }
     if (activeSidebarCat.value === '歷史訂單') {
         return []
@@ -2183,9 +1402,7 @@ const displaySections = computed(() => {
         return [{ key: DEMO_CATEGORY_KEY, label: DEMO_CATEGORY_KEY, dishes: demoDishes.value }]
     }
     const dishes = filteredProducts.value.filter((p) => p.categoryName === activeSidebarCat.value)
-    return dishes.length
-        ? [{ key: activeSidebarCat.value, label: activeSidebarCat.value, dishes }]
-        : []
+    return dishes.length ? [{ key: activeSidebarCat.value, label: activeSidebarCat.value, dishes }] : []
 })
 
 // ── 活動 API ─────────────────────────────────────────
@@ -2206,10 +1423,7 @@ async function fetchActiveEvents(amount = null) {
 
         // ── 所有已達門檻的活動（auto + notify eligible），按 minSpend 降序排列
         // overallBestId = 門檻最高的那個，只有它才顯示「過門檻」eligible-notify toast
-        const allEligibleSorted = [
-            ...autoEvents.value,
-            ...notifyEvents.value.filter((e) => e.isEligible),
-        ].sort((a, b) => b.minSpend - a.minSpend)
+        const allEligibleSorted = [...autoEvents.value, ...notifyEvents.value.filter((e) => e.isEligible)].sort((a, b) => b.minSpend - a.minSpend)
         const overallBestId = allEligibleSorted[0]?.id ?? null
 
         // 有 ≥ 2 個活動達標 → 需要顯示「不得合併使用」警語
@@ -2235,13 +1449,7 @@ async function fetchActiveEvents(amount = null) {
         // ── 清除失效的差額 toast（事件不再差額≤100）──
         for (const [id, key] of _nearToastKeys) {
             const stillNearAuto = nearAutoIdSet.has(id)
-            const stillNearNotify = notifyEvents.value.some(
-                (e) =>
-                    e.id === id &&
-                    !e.isEligible &&
-                    e.minSpend - effectiveAmount > 0 &&
-                    e.minSpend - effectiveAmount <= 100
-            )
+            const stillNearNotify = notifyEvents.value.some((e) => e.id === id && !e.isEligible && e.minSpend - effectiveAmount > 0 && e.minSpend - effectiveAmount <= 100)
             if (!stillNearAuto && !stillNearNotify) {
                 dismissToast(key)
                 _nearToastKeys.delete(id)
@@ -2255,12 +1463,7 @@ async function fetchActiveEvents(amount = null) {
         }
 
         // ── 0. 訪客：只顯示 overallBest 的 eligible-notify（若為 autoEvent）──
-        if (
-            !isLoggedIn.value &&
-            hasBest &&
-            bestId === overallBestId &&
-            !_guestAutoKeys.has(bestId)
-        ) {
+        if (!isLoggedIn.value && hasBest && bestId === overallBestId && !_guestAutoKeys.has(bestId)) {
             const key = pushToast(bestAutoEvent.value, {
                 persistent: true,
                 type: 'eligible-notify',
@@ -2287,10 +1490,7 @@ async function fetchActiveEvents(amount = null) {
                 }
                 // 只有 overallBest 才顯示 eligible-notify，避免多個達標同時顯示
                 if (ev.id === overallBestId && !_eligibleNotifyKeys.has(ev.id)) {
-                    _eligibleNotifyKeys.set(
-                        ev.id,
-                        pushToast(ev, { persistent: true, type: 'eligible-notify' })
-                    )
+                    _eligibleNotifyKeys.set(ev.id, pushToast(ev, { persistent: true, type: 'eligible-notify' }))
                 }
             } else if (gap > 0 && gap <= 100 && !_nearToastKeys.has(ev.id)) {
                 // 差額 > 0 且 ≤ 100 → 差額 toast
@@ -2300,10 +1500,7 @@ async function fetchActiveEvents(amount = null) {
 
         // ── 3. 有 ≥ 2 個活動達標 → 「每次用餐只能參加一個活動」警語 ──
         if (overallBestId && hasMultipleEligible && _oneEventNoteKey === null) {
-            _oneEventNoteKey = pushToast(
-                { id: -1, title: '', discountDescription: '' },
-                { persistent: true, type: 'one-event-note' }
-            )
+            _oneEventNoteKey = pushToast({ id: -1, title: '', discountDescription: '' }, { persistent: true, type: 'one-event-note' })
         }
     } catch {
         /* 靜默 */
@@ -2376,11 +1573,7 @@ async function applyCoupon() {
         if (data.isValid) {
             const discount = data.discount ?? 0
             // 已套用活動且使用優惠券後金額低於活動門檻 → 先警告
-            if (
-                isLoggedIn.value &&
-                bestAutoEvent.value &&
-                total.value - discount < bestAutoEvent.value.minSpend
-            ) {
+            if (isLoggedIn.value && bestAutoEvent.value && total.value - discount < bestAutoEvent.value.minSpend) {
                 pendingCouponData.value = {
                     discount,
                     couponId: data.couponId,
@@ -2564,12 +1757,7 @@ function onSetMealConfirm(meal, qty, note, selectedOptions) {
         editingMealLineId.value = null
     } else {
         for (let i = 0; i < qty; i++) {
-            store.addSetMeal(
-                products.value.find((p) => p.setMealId === meal.id && p.isSetMeal)?.productId ?? 0,
-                meal.setPrice,
-                note,
-                setMealData
-            )
+            store.addSetMeal(products.value.find((p) => p.setMealId === meal.id && p.isSetMeal)?.productId ?? 0, meal.setPrice, note, setMealData)
         }
         showToast(`「${meal.setMealName}」× ${qty} 已加入訂單`)
     }
@@ -2662,9 +1850,9 @@ async function submitOrder() {
                 .filter(Boolean)
                 .join('\n'),
             // 外帶獨立欄位（存入 JSON note customerName/Phone/PickupTime，查詢頁直接讀取，不靠 regex）
-            customerName:  customerName.value.trim(),
+            customerName: customerName.value.trim(),
             customerPhone: customerPhone.value.trim(),
-            pickupTime:    pickupTime.value,
+            pickupTime: pickupTime.value,
             memberId: currentMemberId.value,
             couponId: couponId.value,
             eventId: isLoggedIn.value && bestAutoEvent.value ? bestAutoEvent.value.id : null,
@@ -2723,7 +1911,7 @@ async function submitOrder() {
         orderProgress.value = 1
         step.value = 4
         saveSuccessToStorage() // 存入 localStorage，重整後可還原
-        startStatusPolling()   // 開始輪詢：訂單取消或完成時自動返回
+        startStatusPolling() // 開始輪詢：訂單取消或完成時自動返回
         window.scrollTo({ top: 0, behavior: 'smooth' })
 
         // 動態進度：1.5 秒後推進到「餐點製作中」
@@ -2740,7 +1928,7 @@ async function submitOrder() {
 }
 
 function onSuccessClose() {
-    stopStatusPolling()       // 停止輪詢
+    stopStatusPolling() // 停止輪詢
     clearSuccessFromStorage() // 返回菜單時清除持久化成功頁
     step.value = 1
     pickupTime.value = ''
@@ -2827,10 +2015,7 @@ function handleImgError(dish) {
 
 function resolveImage(url) {
     if (!url) return ''
-    let path = url.replace(/\\/g, '/').replace(/^~\//, '')
-    const match = /\/wwwroot\/(.*)/i.exec('/' + path)
-    if (match?.[1]) path = match[1]
-    return `/${path.replace(/^\//, '')}`
+    return url
 }
 
 watch(isLoggedIn, (loggedIn) => {
@@ -2919,7 +2104,7 @@ onMounted(async () => {
         confirmedCouponDiscount.value = savedSuccess.confirmedCouponDiscount ?? 0
         confirmedSubtotal.value = savedSuccess.confirmedSubtotal ?? 0
         step.value = 4
-        startStatusPolling()   // 重整後還原成功頁時也開始輪詢
+        startStatusPolling() // 重整後還原成功頁時也開始輪詢
         window.scrollTo({ top: 0 })
     }
 })
@@ -3404,11 +2589,7 @@ onMounted(async () => {
     justify-content: space-between;
     padding: 0.75rem 1rem;
     border-bottom: 1px solid rgba(77, 70, 58, 0.2);
-    background: radial-gradient(
-        ellipse 80% 60% at 50% 0%,
-        rgba(227, 199, 107, 0.1) 0%,
-        transparent 70%
-    );
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(227, 199, 107, 0.1) 0%, transparent 70%);
 }
 .cart-close-btn {
     display: none;
@@ -4176,7 +3357,10 @@ onMounted(async () => {
     font-size: 0.92rem;
     letter-spacing: 0.1em;
     cursor: pointer;
-    transition: background 0.2s, border-color 0.2s, filter 0.2s;
+    transition:
+        background 0.2s,
+        border-color 0.2s,
+        filter 0.2s;
 }
 .sp-edit-pickup-btn:hover {
     background: rgba(227, 199, 107, 0.1);
@@ -4813,11 +3997,7 @@ onMounted(async () => {
     text-align: center;
 }
 .candle-glow {
-    background: radial-gradient(
-        ellipse 80% 60% at 50% 0%,
-        rgba(227, 199, 107, 0.1) 0%,
-        transparent 70%
-    );
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(227, 199, 107, 0.1) 0%, transparent 70%);
 }
 
 /* 活動提示 */
@@ -4997,7 +4177,7 @@ onMounted(async () => {
         position: fixed;
         top: var(--top-fixed, 130px); /* navbar + step-banner 高度（JS 量測後注入） */
         left: 0;
-        right: 0;   /* ← 明確指定全寬，overflow-x: auto 才能觸發 */
+        right: 0; /* ← 明確指定全寬，overflow-x: auto 才能觸發 */
         z-index: 50;
         background: #180b06;
         border-bottom: 1px solid rgba(77, 70, 58, 0.3);
@@ -5356,8 +4536,14 @@ onMounted(async () => {
     animation: rm-pop 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 @keyframes rm-pop {
-    from { opacity: 0; transform: scale(0.88); }
-    to   { opacity: 1; transform: scale(1); }
+    from {
+        opacity: 0;
+        transform: scale(0.88);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 .ready-modal-icon {
     font-size: 2.8rem;

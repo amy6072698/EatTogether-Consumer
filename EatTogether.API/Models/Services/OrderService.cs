@@ -1,4 +1,5 @@
 ﻿using EatTogether.API.Models.EfModels;
+using EatTogether.API.Models.Infra;
 using EatTogether.API.Models.Repositories;
 using EatTogether.API.Models.Services;
 using EatTogether.Models.DTOs;
@@ -95,6 +96,7 @@ namespace EatTogether.Models.Services
         private readonly IUserRepository _userRepo;
         private readonly IMemberFavoriteRepository _memberFavoriteRepo;
 		private readonly INotificationService _notifyService;
+        private readonly ImageUrlResolver _imageUrlResolver;
 
 		public OrderService(
             IPreOrderRepository preOrderRepo,
@@ -107,7 +109,8 @@ namespace EatTogether.Models.Services
             IMemberCouponRepository memberCouponRepo,
             IUserRepository userRepo,
             IMemberFavoriteRepository memberFavoriteRepo,
-			INotificationService notifyService)
+			INotificationService notifyService,
+            ImageUrlResolver imageUrlResolver)
         {
             _preOrderRepo = preOrderRepo;
             _tableRepo = tableRepo;
@@ -120,6 +123,7 @@ namespace EatTogether.Models.Services
             _userRepo = userRepo;
             _memberFavoriteRepo = memberFavoriteRepo;
 			_notifyService = notifyService;
+            _imageUrlResolver = imageUrlResolver;
 		}
 
         // ── CreatePreOrder ──────────────────────────────────────────────────
@@ -356,12 +360,11 @@ namespace EatTogether.Models.Services
 
                 if (string.IsNullOrEmpty(name)) continue;
 
-                // DB 若沒有存圖片路徑，依命名慣例推斷（/images/{菜名}.jpg）
-                var imageUrl = p.DisplayImageUrl;
-                if (string.IsNullOrEmpty(imageUrl))
-                    imageUrl = $"/images/{name}.jpg";
+				// DB 若沒有存圖片路徑，依命名慣例推斷（/images/{菜名}.jpg）
+				var subFolder = p.ProductType == "SetMeal" ? "setmeals" : "dishes";
+                var imageUrl = _imageUrlResolver.Resolve(p.DisplayImageUrl, name, subFolder);
 
-                result.Add(new CreatePreOrderItemViewModel
+				result.Add(new CreatePreOrderItemViewModel
                 {
                     ProductId     = p.Id,
                     ProductName   = name,
