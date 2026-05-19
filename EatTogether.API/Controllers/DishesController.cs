@@ -1,3 +1,4 @@
+using EatTogether.API.Models.Infra;
 using EatTogether.API.Models.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,12 +10,12 @@ namespace EatTogether.API.Controllers
     public class DishesController : ControllerBase
     {
         private readonly DishService _dishService;
-        private readonly IConfiguration _configuration;
+		private readonly ImageUrlResolver _imageUrlResolver;
 
-        public DishesController(DishService dishService, IConfiguration configuration)
+        public DishesController(DishService dishService, ImageUrlResolver imageUrlResolver)
         {
             _dishService = dishService;
-            _configuration = configuration;
+			_imageUrlResolver = imageUrlResolver;
         }
 
         [HttpGet("GetAllJson")]
@@ -38,25 +39,9 @@ namespace EatTogether.API.Controllers
         public async Task<IActionResult> GetActiveJson()
         {
             var dtos = await _dishService.GetAllActiveAsync();
-            var staticRoot = _configuration["StaticFilesRoot"];
-            var baseFolder = !string.IsNullOrEmpty(staticRoot) && Directory.Exists(Path.Combine(staticRoot, "images"))
-                ? Path.Combine(staticRoot, "images")
-                : Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
 
             return Ok(dtos.Select(d => {
-                string imageUrl = d.ImageUrl;
-
-                if (string.IsNullOrEmpty(imageUrl))
-                {
-                    string safeName = d.DishName;
-                    foreach (char c in Path.GetInvalidFileNameChars())
-                        safeName = safeName.Replace(c, '_');
-
-                    if (System.IO.File.Exists(Path.Combine(baseFolder, safeName + ".jpg")))
-                        imageUrl = "/images/" + safeName + ".jpg";
-                    else if (System.IO.File.Exists(Path.Combine(baseFolder, safeName + ".png")))
-                        imageUrl = "/images/" + safeName + ".png";
-                }
+                string imageUrl = _imageUrlResolver.Resolve(d.ImageUrl, d.DishName, "dishes");
 
                 return new
                 {
@@ -96,7 +81,7 @@ namespace EatTogether.API.Controllers
                 price = dto.Price,
                 categoryId = dto.CategoryId,
                 categoryName = dto.CategoryName,
-                imageUrl = dto.ImageUrl,
+                imageUrl = _imageUrlResolver.Resolve(dto.ImageUrl, dto.DishName, "dishes"),
                 isRecommended = dto.IsRecommended,
                 isPopular = dto.IsPopular,
                 isVegetarian = dto.IsVegetarian,
