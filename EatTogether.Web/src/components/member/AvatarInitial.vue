@@ -1,33 +1,13 @@
 <template>
-    <div
-        class="avatar-wrap"
-        :class="[`avatar-wrap--${displayMode}`, { 'avatar-wrap--interactive': interactive }]"
-        :style="sizeStyle"
-    >
+    <div class="avatar-wrap" :class="[`avatar-wrap--${displayMode}`, { 'avatar-wrap--interactive': interactive }]" :style="sizeStyle">
         <!-- 模式 1：上傳頭像 -->
-        <img
-            v-if="displayMode === 'photo'"
-            :src="'/uploads/avatars/' + avatarFileName"
-            alt="使用者頭像"
-            class="avatar-photo"
-        />
+        <img v-if="displayMode === 'photo'" :src="apiOrigin + '/uploads/avatars/' + avatarFileName" alt="使用者頭像" class="avatar-photo" />
 
         <!-- 模式 1.5：Google 頭像 -->
-        <img
-            v-else-if="displayMode === 'google'"
-            :src="googleAvatarUrl"
-            alt="Google 頭像"
-            class="avatar-photo"
-        />
+        <img v-else-if="displayMode === 'google'" :src="googleAvatarUrl" alt="Google 頭像" class="avatar-photo" />
 
         <!-- 模式 2：預設圖示 -->
-        <img
-            v-else-if="!avatarLoadError"
-            :src="defaultAvatar"
-            alt="預設頭像"
-            class="avatar-default"
-            @error="avatarLoadError = true"
-        />
+        <img v-else-if="!avatarLoadError" :src="defaultAvatar" alt="預設頭像" class="avatar-default" @error="avatarLoadError = true" />
 
         <!-- 模式 3：名字首字 -->
         <div v-else class="avatar-initial" :style="fontStyle">
@@ -64,6 +44,8 @@ import { computed, ref } from 'vue'
 import defaultAvatar from '@/assets/images/default-avatar.svg'
 
 const avatarLoadError = ref(false)
+
+const apiOrigin = import.meta.env.VITE_API_BASE_URL?.replace('/api', '') ?? ''
 
 const props = defineProps({
     avatarFileName: { type: String, default: null },
