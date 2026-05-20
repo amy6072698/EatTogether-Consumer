@@ -152,11 +152,8 @@ namespace EatTogether.API.Models.Services
 			if (file.Length > 2 * 1024 * 1024)
 				return Result<string>.Fail("file_too_large");
 
-			// 4. 取得上傳目錄（優先 StaticFilesRoot，否則使用 WebRootPath）
-			var staticRoot = _config["StaticFilesRoot"];
-			var baseDir = !string.IsNullOrEmpty(staticRoot) && Directory.Exists(staticRoot)
-				? staticRoot
-				: _env.WebRootPath ?? Path.Combine(_env.ContentRootPath, "wwwroot");
+			// 4. 取得上傳目錄（存到前台 API 自己的 wwwroot，不受 StaticFilesRoot 影響）
+			var baseDir = _env.WebRootPath ?? Path.Combine(_env.ContentRootPath, "wwwroot");
 			var uploadDir = Path.Combine(baseDir, "uploads", "avatars");
 			Directory.CreateDirectory(uploadDir); // 不存在時自動建立
 
