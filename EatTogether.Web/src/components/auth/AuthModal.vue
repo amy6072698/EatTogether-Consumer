@@ -250,13 +250,7 @@ function validateRegisterForm() {
     validatePassword()
     validateConfirmPassword()
 
-    return (
-        !regAccountError.value &&
-        !regNameError.value &&
-        !regEmailError.value &&
-        !regPasswordError.value &&
-        !regConfirmPasswordError.value
-    )
+    return !regAccountError.value && !regNameError.value && !regEmailError.value && !regPasswordError.value && !regConfirmPasswordError.value
 }
 
 async function handleRegister() {
@@ -346,7 +340,7 @@ function switchToLogin() {
 }
 
 // ── Demo 快速填入 ──
-const isDev = import.meta.env.DEV
+const isDev = import.meta.env.MODE === 'development'
 
 const demoLoginAccounts = [
     { label: '一般會員', account: 'amy_chen', password: 'Aa000000' },
@@ -419,23 +413,10 @@ onMounted(() => {
 </script>
 
 <template>
-    <div
-        id="authModal"
-        class="modal fade"
-        data-bs-backdrop="static"
-        data-bs-keyboard="false"
-        tabindex="-1"
-        aria-labelledby="authModalLabel"
-        aria-hidden="true"
-    >
+    <div id="authModal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down modal-eat-dialog">
             <div class="modal-content modal-eat-content">
-                <button
-                    type="button"
-                    class="btn-close btn-close-white btn-sm me-2 mt-2 ms-auto"
-                    data-bs-dismiss="modal"
-                    aria-label="關閉"
-                ></button>
+                <button type="button" class="btn-close btn-close-white btn-sm me-2 mt-2 ms-auto" data-bs-dismiss="modal" aria-label="關閉"></button>
                 <!-- Header -->
                 <div class="modal-header border-0 px-4 py-0">
                     <div class="w-100 d-flex justify-content-center">
@@ -450,17 +431,13 @@ onMounted(() => {
                     <div v-show="activeTab === 'login'">
                         <p class="text-center eat-body-muted mb-0 auth-footer-text">
                             還沒有帳號？
-                            <button type="button" class="eat-link-btn" @click="switchToRegister">
-                                前往註冊
-                            </button>
+                            <button type="button" class="eat-link-btn" @click="switchToRegister">前往註冊</button>
                         </p>
                     </div>
                     <div v-show="activeTab === 'register'">
                         <p class="text-center eat-body-muted mb-0 auth-footer-text">
                             已有帳號？
-                            <button type="button" class="eat-link-btn" @click="switchToLogin">
-                                前往登入
-                            </button>
+                            <button type="button" class="eat-link-btn" @click="switchToLogin">前往登入</button>
                         </p>
                     </div>
                 </div>
@@ -481,17 +458,9 @@ onMounted(() => {
                         <!-- 登入表單 -->
                         <template v-else>
                             <div class="d-flex flex-column gap-2">
-                                <Button
-                                    variant="secondary"
-                                    class="btn-eat-md mb-2"
-                                    @click="handleGoogleLogin"
-                                >
-                                    使用 Google 登入
-                                </Button>
+                                <Button variant="secondary" class="btn-eat-md mb-2" @click="handleGoogleLogin"> 使用 Google 登入 </Button>
 
-                                <div
-                                    class="auth-divider-content feather-divider on-container my-3"
-                                ></div>
+                                <div class="auth-divider-content feather-divider on-container my-3"></div>
 
                                 <!-- 通用錯誤橫幅 -->
                                 <div v-if="loginFormError" class="auth-error-banner" role="alert">
@@ -499,47 +468,20 @@ onMounted(() => {
                                 </div>
 
                                 <!-- 帳號已停用：重新啟用提示 -->
-                                <div
-                                    v-if="showAccountDeleted"
-                                    class="auth-error-banner position-relative"
-                                    role="alert"
-                                >
-                                    <button
-                                        type="button"
-                                        class="btn-close btn-close-white btn-sm position-absolute top-0 end-0 m-1"
-                                        aria-label="關閉"
-                                        @click="showAccountDeleted = false"
-                                    ></button>
+                                <div v-if="showAccountDeleted" class="auth-error-banner position-relative" role="alert">
+                                    <button type="button" class="btn-close btn-close-white btn-sm position-absolute top-0 end-0 m-1" aria-label="關閉" @click="showAccountDeleted = false"></button>
                                     <p class="mb-2">此帳號已停用，是否要重新啟用？</p>
-                                    <Button
-                                        variant="primary"
-                                        class="fs-6 py-1 w-100"
-                                        :loading="isRestoring"
-                                        @click="handleRestoreAccount"
-                                    >
+                                    <Button variant="primary" class="fs-6 py-1 w-100" :loading="isRestoring" @click="handleRestoreAccount">
                                         {{ isRestoring ? '啟用中...' : '重新啟用帳號' }}
                                     </Button>
                                 </div>
 
                                 <!-- Email 未驗證：補寄驗證信 -->
                                 <div v-if="showResendEmail" class="d-flex flex-column gap-2">
-                                    <p class="eat-body-muted mb-0" style="font-size: 0.85rem">
-                                        輸入您的 Email，重新寄送驗證信：
-                                    </p>
+                                    <p class="eat-body-muted mb-0" style="font-size: 0.85rem">輸入您的 Email，重新寄送驗證信：</p>
                                     <div class="d-flex gap-2">
-                                        <input
-                                            v-model="loginResendEmail"
-                                            type="email"
-                                            class="form-control flex-grow-1"
-                                            placeholder="請輸入您的 Email"
-                                            autocomplete="email"
-                                        />
-                                        <Button
-                                            variant="secondary"
-                                            class="btn-eat-md flex-shrink-0"
-                                            :loading="isResendSubmitting"
-                                            @click="handleResendVerifyEmail"
-                                        >
+                                        <input v-model="loginResendEmail" type="email" class="form-control flex-grow-1" placeholder="請輸入您的 Email" autocomplete="email" />
+                                        <Button variant="secondary" class="btn-eat-md flex-shrink-0" :loading="isResendSubmitting" @click="handleResendVerifyEmail">
                                             {{ isResendSubmitting ? '寄送中...' : '重寄驗證信' }}
                                         </Button>
                                     </div>
@@ -549,13 +491,7 @@ onMounted(() => {
                                 <div v-if="isDev" class="demo-panel mb-1">
                                     <p class="demo-panel__label">⚡ DEMO — 點擊自動填入</p>
                                     <div class="d-flex flex-wrap gap-2">
-                                        <button
-                                            v-for="item in demoLoginAccounts"
-                                            :key="item.account"
-                                            type="button"
-                                            class="demo-btn"
-                                            @click="fillDemoLogin(item)"
-                                        >
+                                        <button v-for="item in demoLoginAccounts" :key="item.account" type="button" class="demo-btn" @click="fillDemoLogin(item)">
                                             {{ item.label }}
                                         </button>
                                     </div>
@@ -563,24 +499,13 @@ onMounted(() => {
 
                                 <!-- 帳號 -->
                                 <div>
-                                    <label for="login-account" class="form-label d-block mb-1"
-                                        >帳號</label
-                                    >
-                                    <input
-                                        id="login-account"
-                                        v-model="loginAccount"
-                                        type="text"
-                                        class="form-control w-100"
-                                        placeholder="請輸入帳號"
-                                        autocomplete="off"
-                                    />
+                                    <label for="login-account" class="form-label d-block mb-1">帳號</label>
+                                    <input id="login-account" v-model="loginAccount" type="text" class="form-control w-100" placeholder="請輸入帳號" autocomplete="off" />
                                 </div>
 
                                 <!-- 密碼 -->
                                 <div>
-                                    <label for="login-password" class="form-label d-block mb-1"
-                                        >密碼</label
-                                    >
+                                    <label for="login-password" class="form-label d-block mb-1">密碼</label>
                                     <div class="position-relative">
                                         <input
                                             id="login-password"
@@ -595,42 +520,19 @@ onMounted(() => {
                                             class="btn-eat-password-toggle"
                                             @mousedown.prevent
                                             @click="showLoginPassword = !showLoginPassword"
-                                            :aria-label="
-                                                showLoginPassword ? '隱藏密碼' : '顯示密碼'
-                                            "
+                                            :aria-label="showLoginPassword ? '隱藏密碼' : '顯示密碼'"
                                         >
-                                            <i
-                                                :class="
-                                                    showLoginPassword
-                                                        ? 'bi bi-eye-slash'
-                                                        : 'bi bi-eye'
-                                                "
-                                            ></i>
+                                            <i :class="showLoginPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
                                         </button>
                                     </div>
                                 </div>
 
-                                <Button
-                                    variant="primary"
-                                    class="btn-eat-md mt-3"
-                                    :loading="isLoginSubmitting"
-                                    @click="handleLogin"
-                                >
+                                <Button variant="primary" class="btn-eat-md mt-3" :loading="isLoginSubmitting" @click="handleLogin">
                                     {{ isLoginSubmitting ? '登入中...' : '登入' }}
                                 </Button>
 
                                 <div class="text-center">
-                                    <button
-                                        type="button"
-                                        class="eat-body-muted auth-small-link"
-                                        style="
-                                            background: none;
-                                            border: none;
-                                            padding: 0;
-                                            cursor: pointer;
-                                        "
-                                        @click="handleForgotPassword"
-                                    >
+                                    <button type="button" class="eat-body-muted auth-small-link" style="background: none; border: none; padding: 0; cursor: pointer" @click="handleForgotPassword">
                                         忘記密碼？
                                     </button>
                                 </div>
@@ -652,17 +554,9 @@ onMounted(() => {
 
                             <!-- 註冊表單 -->
                             <template v-else>
-                                <Button
-                                    variant="secondary"
-                                    class="btn-eat-md mb-2"
-                                    @click="handleGoogleLogin"
-                                >
-                                    使用 Google 快速註冊
-                                </Button>
+                                <Button variant="secondary" class="btn-eat-md mb-2" @click="handleGoogleLogin"> 使用 Google 快速註冊 </Button>
 
-                                <div
-                                    class="auth-divider-content feather-divider on-container my-3"
-                                ></div>
+                                <div class="auth-divider-content feather-divider on-container my-3"></div>
 
                                 <!-- 通用錯誤橫幅 -->
                                 <div v-if="regFormError" class="auth-error-banner" role="alert">
@@ -672,20 +566,12 @@ onMounted(() => {
                                 <!-- Demo 快速填入（僅開發環境顯示） -->
                                 <div v-if="isDev" class="demo-panel mb-1">
                                     <p class="demo-panel__label">⚡ DEMO — 點擊自動填入</p>
-                                    <button
-                                        type="button"
-                                        class="demo-btn"
-                                        @click="fillDemoRegister"
-                                    >
-                                        示範填入
-                                    </button>
+                                    <button type="button" class="demo-btn" @click="fillDemoRegister">示範填入</button>
                                 </div>
 
                                 <!-- 帳號 -->
                                 <div>
-                                    <label for="reg-account" class="form-label d-block mb-1"
-                                        >帳號</label
-                                    >
+                                    <label for="reg-account" class="form-label d-block mb-1">帳號</label>
                                     <input
                                         id="reg-account"
                                         v-model="regAccount"
@@ -695,23 +581,15 @@ onMounted(() => {
                                         :class="{ 'is-invalid': regAccountError }"
                                         placeholder="限英數字及底線，3–50 字元"
                                         autocomplete="username"
-                                        :aria-describedby="
-                                            regAccountError ? 'reg-account-error' : undefined
-                                        "
+                                        :aria-describedby="regAccountError ? 'reg-account-error' : undefined"
                                         :aria-invalid="regAccountError ? 'true' : undefined"
                                     />
-                                    <FormErrorMessage
-                                        id="reg-account-error"
-                                        :show="!!regAccountError"
-                                        :message="regAccountError"
-                                    />
+                                    <FormErrorMessage id="reg-account-error" :show="!!regAccountError" :message="regAccountError" />
                                 </div>
 
                                 <!-- 姓名 -->
                                 <div>
-                                    <label for="reg-name" class="form-label d-block mb-1"
-                                        >姓名</label
-                                    >
+                                    <label for="reg-name" class="form-label d-block mb-1">姓名</label>
                                     <input
                                         id="reg-name"
                                         v-model="regName"
@@ -721,23 +599,15 @@ onMounted(() => {
                                         :class="{ 'is-invalid': regNameError }"
                                         placeholder="請輸入您的姓名"
                                         autocomplete="name"
-                                        :aria-describedby="
-                                            regNameError ? 'reg-name-error' : undefined
-                                        "
+                                        :aria-describedby="regNameError ? 'reg-name-error' : undefined"
                                         :aria-invalid="regNameError ? 'true' : undefined"
                                     />
-                                    <FormErrorMessage
-                                        id="reg-name-error"
-                                        :show="!!regNameError"
-                                        :message="regNameError"
-                                    />
+                                    <FormErrorMessage id="reg-name-error" :show="!!regNameError" :message="regNameError" />
                                 </div>
 
                                 <!-- Email -->
                                 <div>
-                                    <label for="reg-email" class="form-label d-block mb-1"
-                                        >Email</label
-                                    >
+                                    <label for="reg-email" class="form-label d-block mb-1">Email</label>
                                     <input
                                         id="reg-email"
                                         v-model="regEmail"
@@ -747,23 +617,15 @@ onMounted(() => {
                                         :class="{ 'is-invalid': regEmailError }"
                                         placeholder="example@email.com"
                                         autocomplete="email"
-                                        :aria-describedby="
-                                            regEmailError ? 'reg-email-error' : undefined
-                                        "
+                                        :aria-describedby="regEmailError ? 'reg-email-error' : undefined"
                                         :aria-invalid="regEmailError ? 'true' : undefined"
                                     />
-                                    <FormErrorMessage
-                                        id="reg-email-error"
-                                        :show="!!regEmailError"
-                                        :message="regEmailError"
-                                    />
+                                    <FormErrorMessage id="reg-email-error" :show="!!regEmailError" :message="regEmailError" />
                                 </div>
 
                                 <!-- 密碼 -->
                                 <div>
-                                    <label for="reg-password" class="form-label d-block mb-1"
-                                        >密碼</label
-                                    >
+                                    <label for="reg-password" class="form-label d-block mb-1">密碼</label>
                                     <div class="position-relative">
                                         <input
                                             id="reg-password"
@@ -774,9 +636,7 @@ onMounted(() => {
                                             :class="{ 'is-invalid': regPasswordError }"
                                             placeholder="至少 8 個字元"
                                             autocomplete="new-password"
-                                            :aria-describedby="
-                                                regPasswordError ? 'reg-password-error' : undefined
-                                            "
+                                            :aria-describedby="regPasswordError ? 'reg-password-error' : undefined"
                                             :aria-invalid="regPasswordError ? 'true' : undefined"
                                         />
                                         <button
@@ -786,28 +646,16 @@ onMounted(() => {
                                             @click="showPassword = !showPassword"
                                             :aria-label="showPassword ? '隱藏密碼' : '顯示密碼'"
                                         >
-                                            <i
-                                                :class="
-                                                    showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'
-                                                "
-                                            ></i>
+                                            <i :class="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
                                         </button>
                                     </div>
 
-                                    <FormErrorMessage
-                                        id="reg-password-error"
-                                        :show="!!regPasswordError"
-                                        :message="regPasswordError"
-                                    />
+                                    <FormErrorMessage id="reg-password-error" :show="!!regPasswordError" :message="regPasswordError" />
                                 </div>
 
                                 <!-- 確認密碼 -->
                                 <div>
-                                    <label
-                                        for="reg-confirm-password"
-                                        class="form-label d-block mb-1"
-                                        >確認密碼</label
-                                    >
+                                    <label for="reg-confirm-password" class="form-label d-block mb-1">確認密碼</label>
                                     <div class="position-relative">
                                         <input
                                             id="reg-confirm-password"
@@ -820,45 +668,22 @@ onMounted(() => {
                                             }"
                                             placeholder="再次輸入密碼"
                                             autocomplete="new-password"
-                                            :aria-describedby="
-                                                regConfirmPasswordError
-                                                    ? 'reg-confirm-password-error'
-                                                    : undefined
-                                            "
-                                            :aria-invalid="
-                                                regConfirmPasswordError ? 'true' : undefined
-                                            "
+                                            :aria-describedby="regConfirmPasswordError ? 'reg-confirm-password-error' : undefined"
+                                            :aria-invalid="regConfirmPasswordError ? 'true' : undefined"
                                         />
                                         <button
                                             type="button"
                                             class="btn-eat-password-toggle"
                                             @click="showConfirmPassword = !showConfirmPassword"
-                                            :aria-label="
-                                                showConfirmPassword ? '隱藏密碼' : '顯示密碼'
-                                            "
+                                            :aria-label="showConfirmPassword ? '隱藏密碼' : '顯示密碼'"
                                         >
-                                            <i
-                                                :class="
-                                                    showConfirmPassword
-                                                        ? 'bi bi-eye-slash'
-                                                        : 'bi bi-eye'
-                                                "
-                                            ></i>
+                                            <i :class="showConfirmPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
                                         </button>
                                     </div>
-                                    <FormErrorMessage
-                                        id="reg-confirm-password-error"
-                                        :show="!!regConfirmPasswordError"
-                                        :message="regConfirmPasswordError"
-                                    />
+                                    <FormErrorMessage id="reg-confirm-password-error" :show="!!regConfirmPasswordError" :message="regConfirmPasswordError" />
                                 </div>
 
-                                <Button
-                                    variant="primary"
-                                    class="btn-eat-md mt-3 mb-4"
-                                    :loading="isSubmitting"
-                                    @click="handleRegister"
-                                >
+                                <Button variant="primary" class="btn-eat-md mt-3 mb-4" :loading="isSubmitting" @click="handleRegister">
                                     {{ isSubmitting ? '註冊中...' : '註冊' }}
                                 </Button>
                             </template>
