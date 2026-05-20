@@ -219,15 +219,16 @@ namespace EatTogether.API
 			var staticRoot = builder.Configuration["StaticFilesRoot"];
 			if (!string.IsNullOrEmpty(staticRoot) && Directory.Exists(staticRoot))
 			{
+				// 服務後台 MVC 的 wwwroot/images（開發環境共用圖片）
 				app.UseStaticFiles(new StaticFileOptions
 				{
 					FileProvider = new Microsoft.Extensions.FileProviders.PhysicalFileProvider(staticRoot)
 				});
 			}
-			else
-			{
-				app.UseStaticFiles();
-			}
+
+			// 服務前台 API 自己的 wwwroot（uploads/avatars 等）
+			app.UseStaticFiles();
+			
 			// CSP Header：縱深防禦，限制瀏覽器可載入的資源來源
 			app.Use(async (ctx, next) =>
 			{
