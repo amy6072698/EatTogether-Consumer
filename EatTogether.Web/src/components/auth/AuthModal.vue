@@ -119,7 +119,8 @@ async function handleLogin() {
         })
 
         if (res.ok) {
-            await authStore.fetchMe()
+            const data = await res.json() // ← 取用 login 回傳的資料
+            authStore.setAuth(data) // ← 直接存入 store
             const modalEl = document.querySelector('#authModal')
             Modal.getInstance(modalEl)?.hide()
             const redirect = route.query.redirect
@@ -191,7 +192,8 @@ async function handleRestoreAccount() {
         })
 
         if (res.ok) {
-            await authStore.fetchMe()
+            const data = await res.json() // ← 取用 login 回傳的資料
+            authStore.setAuth(data) // ← 直接存入 store
             showAccountDeleted.value = false
             const modalEl = document.querySelector('#authModal')
             Modal.getInstance(modalEl)?.hide()
