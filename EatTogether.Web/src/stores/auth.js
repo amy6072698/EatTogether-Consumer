@@ -27,6 +27,11 @@ export const useAuthStore = defineStore('auth', () => {
 
     // ── Actions ────────────────────────────────────────────
 
+    function setAuth(data) {
+        member.value = { ...INITIAL_MEMBER(), ...data }
+        isLoggedIn.value = true
+    }
+
     /**
      * 清空登入狀態（供 apiFetch refresh 失敗時呼叫）
      * 不呼叫後端 API，純粹清空前端 store 狀態
@@ -93,6 +98,7 @@ export const useAuthStore = defineStore('auth', () => {
         isLoggedIn,
         isLoading,
         avatarInitial,
+        setAuth,
         clearAuth,
         fetchMe,
         logout,
